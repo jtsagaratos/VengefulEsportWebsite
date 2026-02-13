@@ -33,26 +33,25 @@ export default function Home() {
           </Link>
         </section>
 
-        <section
-          id="about"
-          className="grid gap-8 rounded-3xl border border-vengefulGray bg-vengefulDark/30 p-8 md:grid-cols-2"
-        >
-          <div>
-            <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
-              About
-            </p>
-            <h2 className="mt-2 text-3xl font-semibold">Forged in Rivalry</h2>
-          </div>
-          <div className="space-y-4 text-gray-300">
-            <p>
-              Vengeful Esports began as a local squad in 2018 and has evolved into
-              a multi-title contender recognized for disciplined fundamentals and
-              unbeatable clutch instincts.
-            </p>
-            <p>
-              Our mission is simple: elevate every arena we enter by combining
-              talent, innovation, and fearless creativity for fans worldwide.
-            </p>
+        <section id="about" className="space-y-4">
+          <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
+            About
+          </p>
+          <div className="grid gap-8 rounded-3xl border border-vengefulGray bg-vengefulDark/30 p-8 md:grid-cols-2">
+            <div>
+              <h2 className="text-3xl font-semibold">Forged in Rivalry</h2>
+            </div>
+            <div className="space-y-4 text-gray-300">
+              <p>
+                Vengeful Esports began as a local squad in 2018 and has evolved into
+                a multi-title contender recognized for disciplined fundamentals and
+                unbeatable clutch instincts.
+              </p>
+              <p>
+                Our mission is simple: elevate every arena we enter by combining
+                talent, innovation, and fearless creativity for fans worldwide.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -168,7 +167,7 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="rounded-3xl bg-vengefulDark px-6 py-8 text-sm text-gray-200">
+        <footer className="py-8 text-sm text-gray-200">
           <div className="flex flex-col gap-6 md:grid md:grid-cols-3 md:items-center">
             <div>
               <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
@@ -188,7 +187,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center gap-2 text-center">
               <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
-                Follow
+                Follow Us
               </p>
               <div className="flex gap-4 text-white">
                 <a
