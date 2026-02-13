@@ -12,26 +12,22 @@ export const metadata: Metadata = {
 export default function WatchPage() {
   const liveStream = streams.find((stream) => stream.isLive);
   return (
-    <div className="min-h-screen bg-vengefulBlack text-white">
+    <div className="min-h-screen bg-vengefulBlack/70 text-white">
       <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-10 sm:px-6 lg:px-8">
         <TopNav />
 
-        <section className="space-y-4 rounded-3xl border border-vengefulGray bg-vengefulDark/30 p-10">
-          <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
-            Watch
-          </p>
+        <section className="glass-panel space-y-4 p-10">
+          <p className="section-heading">Watch</p>
           <h1 className="text-4xl font-semibold">Live On Twitch</h1>
           <p className="text-lg text-gray-200">
-            Follow our creators to catch scrims, ranked grinds, and match-day
-            prep live. Times are listed in Pacific Time.
+            Follow our creators to catch scrims, ranked grinds, and match-day prep live.
+            Times are listed in Pacific Time.
           </p>
         </section>
 
-        <section className="rounded-3xl border border-vengefulGray bg-vengefulDark/40 p-6 space-y-4">
+        <section className="glass-panel p-6 space-y-4">
           <div className="flex items-center justify-between">
-            <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
-              Live Player
-            </p>
+            <p className="section-heading text-vengefulLight">Live Player</p>
             {liveStream ? (
               <span className="text-sm text-emerald-400">
                 {liveStream.name} is live now
@@ -41,7 +37,7 @@ export default function WatchPage() {
             )}
           </div>
           {liveStream ? (
-            <div className="aspect-video w-full overflow-hidden rounded-2xl border border-vengefulGray">
+            <div className="aspect-video w-full overflow-hidden rounded-2xl border border-white/10">
               <iframe
                 title={`${liveStream.name} Twitch Stream`}
                 src={`https://player.twitch.tv/?channel=${liveStream.channel}&parent=localhost&parent=vengeful.gg`}
@@ -50,7 +46,7 @@ export default function WatchPage() {
               />
             </div>
           ) : (
-            <div className="flex h-64 items-center justify-center rounded-2xl border border-dashed border-vengefulGray text-gray-400">
+            <div className="flex h-64 items-center justify-center rounded-2xl border border-dashed border-white/20 text-gray-400">
               Stream will appear here when a player goes live.
             </div>
           )}
@@ -60,19 +56,17 @@ export default function WatchPage() {
           {streams.map((stream) => (
             <article
               key={stream.url}
-              className="flex flex-col gap-4 rounded-2xl border border-vengefulGray bg-vengefulDark/40 p-6"
+              className="glass-card flex flex-col gap-4 p-6 hover:-translate-y-1 transition"
             >
               <div>
-                <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
-                  {stream.platform}
-                </p>
-                <div className="mt-2 flex items-center gap-3">
+                <p className="section-heading text-gray-400">{stream.platform}</p>
+                <div className="mt-3 flex items-center gap-3">
                   <Image
                     src={stream.logo}
                     alt={`${stream.name} avatar`}
-                    width={40}
-                    height={40}
-                    className="h-10 w-10 rounded-full border border-vengefulGray object-cover"
+                    width={48}
+                    height={48}
+                    className="h-12 w-12 rounded-full border border-white/20 object-cover"
                   />
                   <h2 className="text-2xl font-semibold">{stream.name}</h2>
                   <span

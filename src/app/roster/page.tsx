@@ -9,15 +9,13 @@ export const metadata: Metadata = {
 
 export default function RosterPage() {
   return (
-    <div className="min-h-screen bg-vengefulBlack text-white">
+    <div className="min-h-screen bg-vengefulBlack/70 text-white">
       <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-10 sm:px-6 lg:px-8">
         <TopNav />
 
         <section className="space-y-6">
           <div>
-            <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
-              Roster
-            </p>
+            <p className="section-heading">Roster</p>
             <h1 className="mt-3 text-4xl font-semibold">Alpha Unit</h1>
             <p className="mt-2 text-gray-300">
               Built on chemistry, discipline, and fearless entries.
@@ -25,10 +23,7 @@ export default function RosterPage() {
           </div>
           <div className="grid gap-6">
             {roster.map((player) => (
-              <article
-                key={player.name}
-                className="rounded-2xl border border-vengefulGray bg-vengefulDark/40 p-6 space-y-3"
-              >
+              <article key={player.name} className="glass-card p-6 space-y-3">
                 <div className="flex items-center justify-between">
                   <h2 className="text-2xl font-bold">{player.name}</h2>
                   <span className="text-xs uppercase tracking-[0.3em] text-gray-400">
@@ -36,7 +31,7 @@ export default function RosterPage() {
                   </span>
                 </div>
                 <p className="text-gray-300">{player.bio}</p>
-                <div className="rounded-xl border border-vengefulGray/60 bg-vengefulBlack/40 p-4 text-sm text-gray-400">
+                <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-gray-400">
                   Highlights and match stats coming soon.
                 </div>
               </article>

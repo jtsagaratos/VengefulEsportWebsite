@@ -14,15 +14,13 @@ const milestones = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-vengefulBlack text-white">
+    <div className="min-h-screen bg-vengefulBlack/70 text-white">
       <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-10 sm:px-6 lg:px-8">
         <TopNav />
 
-        <section className="rounded-3xl border border-vengefulGray bg-vengefulDark/30 p-10 space-y-6">
+        <section className="glass-panel p-10 space-y-6">
           <div>
-            <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
-              About
-            </p>
+            <p className="section-heading">About</p>
             <h1 className="mt-3 text-4xl font-semibold">Forged in Rivalry</h1>
           </div>
           <p className="text-lg text-gray-200">
@@ -37,14 +35,14 @@ export default function AboutPage() {
           </p>
         </section>
 
-        <section className="rounded-3xl border border-vengefulGray bg-vengefulDark/30 p-8 space-y-6">
+        <section className="glass-panel p-8 space-y-6">
           <div>
             <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
               Leadership
             </p>
           </div>
           <div className="grid gap-6">
-            <article className="rounded-2xl border border-vengefulGray bg-vengefulBlack/40 p-6 space-y-3">
+            <article className="glass-card p-6 space-y-3">
               <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
                 Owner
               </p>
@@ -55,7 +53,7 @@ export default function AboutPage() {
                 Oversees competitive direction, brand partnerships, and player development.
               </p>
             </article>
-            <article className="rounded-2xl border border-vengefulGray bg-vengefulBlack/40 p-6 space-y-3">
+            <article className="glass-card p-6 space-y-3">
               <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
                 Co-Owner
               </p>
@@ -69,7 +67,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="rounded-3xl border border-vengefulGray bg-vengefulDark/20 p-8 space-y-4">
+        <section className="glass-panel p-8 space-y-4">
           <h2 className="text-2xl font-semibold text-vengefulLight">
             Milestones
           </h2>

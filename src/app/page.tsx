@@ -6,38 +6,41 @@ import { roster, scheduleEvents, sponsors } from "@/data/siteContent";
 export default function Home() {
   const upcomingEvents = scheduleEvents.slice(0, 3);
   return (
-    <div className="min-h-screen bg-vengefulBlack text-white">
+    <div className="min-h-screen bg-vengefulBlack/70 text-white">
       <div className="mx-auto flex max-w-6xl flex-col gap-16 px-4 py-10 sm:px-6 lg:px-8">
         <TopNav />
 
         <section
           id="home"
-          className="rounded-3xl border border-vengefulGray bg-gradient-to-b from-vengefulDark/80 to-vengefulBlack p-10 text-center shadow-[0_0_60px_rgba(142,91,255,0.2)]"
+          className="glass-panel relative overflow-hidden px-6 py-12 text-center sm:px-10"
         >
-          <p className="text-xs uppercase tracking-[0.5em] text-gray-300">
+          <div className="absolute inset-0 bg-gradient-to-br from-vengefulDark/70 via-transparent to-vengefulLight/10 pointer-events-none" />
+          <div className="relative space-y-6">
+            <p className="section-heading text-gray-300">
             Elite Esports Division
           </p>
           <h1 className="mt-4 text-4xl font-bold leading-tight sm:text-6xl">
-            Dominate every arena with{" "}
+            Dominate with{" "}
             <span className="text-vengefulLight">Vengeful Esports</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-3xl text-lg text-gray-200">
+          <p className="mx-auto max-w-3xl text-lg text-gray-200">
             Relentless focus, calculated aggression, and flawless teamwork—tune in
             as we chase trophies across every global stage.
           </p>
           <Link
             href="/watch"
-            className="mt-8 inline-flex items-center justify-center rounded-full bg-vengefulLight px-10 py-3 font-semibold text-vengefulBlack transition hover:bg-white"
+            className="inline-flex items-center justify-center rounded-full bg-vengefulLight px-10 py-3 font-semibold text-vengefulBlack transition hover:bg-white"
           >
             Watch Live
           </Link>
+          </div>
         </section>
 
         <section id="about" className="space-y-4">
-          <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
+          <p className="section-heading">
             About
           </p>
-          <div className="grid gap-8 rounded-3xl border border-vengefulGray bg-vengefulDark/30 p-8 md:grid-cols-2">
+          <div className="glass-panel grid gap-8 p-8 md:grid-cols-2">
             <div>
               <h2 className="text-3xl font-semibold">Forged in Rivalry</h2>
             </div>
@@ -55,18 +58,18 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="roster" className="space-y-6">
-          <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
+        <section id="roster" className="space-y-8">
+          <p className="section-heading">
             Roster
           </p>
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-8 sm:grid-cols-2">
             {roster.map((player) => (
               <article
                 key={player.name}
-                className="rounded-2xl border border-vengefulGray bg-vengefulDark/40 p-6"
+                className="glass-card p-8 text-lg"
               >
                 <div className="flex items-center justify-between">
-                  <h3 className="text-2xl font-bold">{player.name}</h3>
+                  <h3 className="text-3xl font-bold">{player.name}</h3>
                   <span className="text-xs uppercase tracking-[0.3em] text-gray-400">
                     {player.role}
                   </span>
@@ -77,9 +80,9 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="space-y-6">
+        <section className="space-y-8">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
+            <p className="section-heading">
               Upcoming Events
             </p>
             <Link
@@ -89,17 +92,17 @@ export default function Home() {
               Full Schedule
             </Link>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-3">
             {upcomingEvents.map((event) => (
               <article
                 key={event.date}
-                className="rounded-2xl border border-vengefulGray bg-vengefulDark/40 p-6 space-y-3"
+                className="glass-card p-8 space-y-4 text-lg"
               >
-                <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
+                <p className="section-heading text-gray-400">
                   {event.stage}
                 </p>
-                <h3 className="text-xl font-semibold">{event.title}</h3>
-                <p className="text-sm text-gray-400">vs {event.opponent}</p>
+                <h3 className="text-2xl font-semibold">{event.title}</h3>
+                <p className="text-base text-gray-400">vs {event.opponent}</p>
                 <p className="text-gray-200">
                   {new Date(event.date).toLocaleDateString("en-US", {
                     month: "long",
@@ -119,15 +122,15 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="space-y-6">
-          <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
+        <section className="space-y-8">
+          <p className="section-heading">
             Sponsors
           </p>
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-3">
             {sponsors.map((brand) => (
               <div
                 key={brand}
-                className="rounded-2xl border border-vengefulGray bg-vengefulDark/30 px-6 py-10 text-center text-sm uppercase tracking-[0.3em] text-gray-200"
+                className="glass-card px-8 py-10 text-center text-base uppercase tracking-[0.35em] text-gray-200"
               >
                 {brand}
               </div>
@@ -135,27 +138,27 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="space-y-4">
-          <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
+        <section className="space-y-6">
+          <p className="section-heading">
             Subscribe
           </p>
-          <div className="grid gap-6 rounded-3xl border border-vengefulGray bg-vengefulDark/40 p-8 md:grid-cols-[1.2fr_0.8fr] md:items-center">
-            <div className="text-gray-300">
-              <h3 className="text-2xl font-semibold text-white">Signal Briefing</h3>
-              <p className="mt-2 text-sm text-gray-400">
+          <div className="glass-panel grid gap-10 p-10 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+            <div className="space-y-4 text-gray-300">
+              <h3 className="text-4xl font-semibold text-white">Signal Briefing</h3>
+              <p className="text-base text-gray-400">
                 Monthly digest with match alerts and merch drops.
               </p>
             </div>
-            <form className="flex flex-col items-center gap-2 text-center">
-              <div className="flex w-full max-w-xl flex-col gap-2 sm:flex-row sm:items-center sm:justify-center">
+            <form className="flex flex-col items-center gap-3 text-center">
+              <div className="flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
                 <input
                   type="email"
                   placeholder="you@example.com"
-                  className="w-full rounded-full border border-vengefulGray bg-vengefulBlack/60 px-6 py-3 text-white placeholder:text-gray-500 focus:border-vengefulLight focus:outline-none"
+                  className="w-full rounded-full border border-vengefulGray bg-vengefulBlack/60 px-8 py-4 text-white placeholder:text-gray-500 focus:border-vengefulLight focus:outline-none text-lg"
                 />
                 <button
                   type="submit"
-                  className="rounded-full bg-vengefulLight px-6 py-3 font-semibold text-vengefulBlack transition hover:bg-white sm:w-auto"
+                  className="rounded-full bg-vengefulLight px-8 py-4 text-lg font-semibold text-vengefulBlack transition hover:bg-white sm:w-auto"
                 >
                   Subscribe
                 </button>
@@ -167,13 +170,13 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="py-8 text-sm text-gray-200">
+        <footer className="glass-panel px-6 py-8 text-sm text-gray-200">
           <div className="flex flex-col gap-6 md:grid md:grid-cols-3 md:items-center">
             <div>
               <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
                 Contact Us
               </p>
-              <p className="mt-2 text-lg text-white">contact@vengeful.gg</p>
+              <p className="mt-2 text-lg text-white">vengflesports@gmail.com</p>
             </div>
             <div className="flex flex-col items-center justify-center gap-2 text-center">
               <Image
