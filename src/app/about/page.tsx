@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 };
 
 const milestones = [
+  { year: "FEB 2026", detail: "Vengeful Esports is founded" },
   { year: "Mid FEB 2026", detail: "VNGFL enters first MRC, placing 2nd in Open Qualifiers" },
 ];
 

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { NextEventCountdown } from "@/components/NextEventCountdown";
 import { TopNav } from "@/components/TopNav";
-import { merch, news, roster, scheduleEvents, sponsors } from "@/data/siteContent";
+import { merch, news, roster, scheduleEvents, sponsors, streams } from "@/data/siteContent";
 
 const statHighlights = [
   { label: "Matches Played", value: "80+", detail: "since MR S6" },
@@ -36,7 +36,7 @@ const contentHighlights = [
     title: "Behind the keyboards",
     copy: "Instagram reels from events, bootcamps, and fan meetups.",
     action: "Follow IG",
-    href: "https://instagram.com/vngfesports/",
+    href: "https://www.instagram.com/vngfesports/",
   },
   {
     title: "Tactical briefing",
@@ -44,6 +44,28 @@ const contentHighlights = [
     action: "Join List",
     href: "#subscribe",
   },
+];
+
+const previousMatches = [
+  {
+    opponent: "ZAYINHELLO",
+    event: "MRC S6 Open Qualifiers",
+    date: "February 14, 2026",
+    result: "Win 3-0",
+  },
+ {
+    opponent: "Purge Umbra",
+    event: "MRC S6 Open Qualifiers",
+    date: "February 14, 2026",
+    result: "Win 1-0",
+  },
+ {
+    opponent: "ScarletValor",
+    event: "MRC S6 Open Qualifiers",
+    date: "February 14, 2026",
+    result: "Win 1-0",
+  },
+  
 ];
 
 export default function Home() {
@@ -134,21 +156,29 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-black/60 p-6">
-                  <div className="flex items-center justify-between text-2xl font-bold">
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.35em] text-gray-500">Vengeful</p>
-                      <p className="text-4xl">0</p>
+                  <div className="flex items-end justify-between text-2xl font-bold">
+                    <div className="flex items-end gap-4">
+                      <div className="translate-y-2">
+                        <Image
+                          src="/VNGFLogo_1.png"
+                          alt="Vengeful Esports logo"
+                          width={48}
+                          height={48}
+                          className="h-12 w-12 object-contain"
+                        />
+                      </div>
+                      <p className="text-4xl leading-none">0</p>
                     </div>
                     <div className="text-xs uppercase tracking-[0.5em] text-gray-500">vs</div>
-                    <div className="text-right">
-                      <p className="text-xs uppercase tracking-[0.35em] text-gray-500">{nextEvent.opponent}</p>
-                      <p className="text-4xl">0</p>
+                    <div className="flex items-end gap-4 text-right">
+                      <p className="text-base uppercase tracking-[0.45em] text-gray-300">{nextEvent.opponent}</p>
+                      <p className="text-4xl leading-none">0</p>
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-3 text-sm text-gray-400">
                   <div className="badge-pill bg-black/40">MRC</div>
-                  <div className="badge-pill bg-black/40">Double Elimation</div>
+                  <div className="badge-pill bg-black/40">Double Elimination</div>
                 </div>
                 <Link
                   href="/schedule"
@@ -177,8 +207,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="about" className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="glass-panel space-y-6 bg-gradient-to-br from-vengefulDark/80 via-black to-black p-10">
+        <section id="about" className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
+          <div className="glass-panel space-y-6 bg-gradient-to-br from-vengefulDark/80 via-black to-black p-10 lg:h-[540px]">
             <p className="section-eyebrow">Inside the program</p>
             <h2 className="text-3xl font-semibold">Forged through rivalry and relentless review.</h2>
             <p className="text-gray-300">
@@ -195,21 +225,54 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="glass-card relative min-h-[320px] overflow-hidden">
-            <Image
-              src="/background.png"
-              alt="Players on stage"
-              fill
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover opacity-80"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-transparent to-black/40" />
-            <div className="absolute bottom-0 left-0 right-0 p-8">
-              <p className="section-eyebrow">
-                2018 {"->"} today
+          <div className="glass-card flex h-full flex-col gap-6 p-8 lg:h-[540px]">
+            <div>
+              <p className="section-eyebrow">Game Recaps</p>
+              <p className="text-2xl font-semibold text-white">Witness Greatness</p>
+              <p className="mt-2 text-sm text-gray-400">
+                Scroll through the latest series to see how the roster is trending.
               </p>
-              <p className="text-2xl font-semibold">From local upstarts to a multi-title powerhouse.</p>
+            </div>
+            <div className="flex-1 space-y-4 overflow-y-auto pr-2">
+              {previousMatches.map((match) => {
+                const [outcome, ...scoreParts] = match.result.split(" ");
+                const score = scoreParts.join(" ") || match.result;
+                const outcomeIsWin = (outcome ?? "").toLowerCase() === "win";
+                return (
+                  <div
+                    key={`${match.event}-${match.opponent}`}
+                    className="space-y-3 rounded-2xl border border-white/10 bg-black/40 p-4"
+                  >
+                    <div className="flex items-center justify-between text-xs text-gray-400">
+                      <p className="uppercase tracking-[0.4em] text-vengefulLight">{match.event}</p>
+                      <p>{match.date}</p>
+                    </div>
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-4">
+                        <Image
+                          src="/VNGFLogo_1.png"
+                          alt="Vengeful Esports logo"
+                          width={36}
+                          height={36}
+                          className="h-9 w-9 object-contain"
+                        />
+                        <span className="text-xs font-semibold uppercase tracking-[0.5em] text-gray-500">vs</span>
+                        <p className="text-lg font-semibold text-white">{match.opponent}</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span
+                          className={`rounded-full px-2 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.3em] ${
+                            outcomeIsWin ? "bg-emerald-400/15 text-emerald-300" : "bg-rose-400/15 text-rose-300"
+                          }`}
+                        >
+                          {outcome ?? match.result}
+                        </span>
+                        <p className="text-2xl font-bold text-white">{score}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -225,22 +288,40 @@ export default function Home() {
             </Link>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
-            {roster.map((player) => (
-              <article key={player.name} className="glass-card flex flex-col gap-4 p-6">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-2xl font-bold">{player.name}</h3>
-                  <span className="text-xs uppercase tracking-[0.4em] text-gray-500">{player.role}</span>
-                </div>
-                <p className="text-gray-300">{player.bio}</p>
-                <div className="flex flex-wrap gap-3 text-xs text-gray-500">
-                  {(player.badges ?? ["Match ready"]).map((badge) => (
-                    <span key={badge} className="badge-pill bg-black/40">
-                      {badge}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ))}
+            {roster.map((player) => {
+              const playerStream = streams.find(
+                (stream) => stream.name.toLowerCase() === player.name.toLowerCase(),
+              );
+              const playerImage = player.image ?? playerStream?.logo ?? "/VNGFLogo_1.png";
+
+              return (
+                <article key={player.name} className="glass-card flex flex-col gap-4 p-6 sm:flex-row sm:items-center">
+                  <div className="flex-shrink-0">
+                    <Image
+                      src={playerImage}
+                      alt={`${player.name} avatar`}
+                      width={96}
+                      height={96}
+                      className="h-24 w-24 rounded-3xl border border-white/10 object-cover"
+                    />
+                  </div>
+                  <div className="flex-1 space-y-3">
+                    <div className="flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
+                      <h3 className="text-2xl font-bold">{player.name}</h3>
+                      <span className="text-xs uppercase tracking-[0.4em] text-gray-500">{player.role}</span>
+                    </div>
+                    <p className="text-gray-300">{player.bio}</p>
+                    <div className="flex flex-wrap gap-3 text-xs text-gray-500">
+                      {(player.badges ?? ["Match ready"]).map((badge) => (
+                        <span key={badge} className="badge-pill bg-black/40">
+                          {badge}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
 
@@ -258,14 +339,14 @@ export default function Home() {
             {upcomingEvents.map((event) => (
               <article
                 key={`${event.date}-${event.opponent}`}
-                className="glass-panel flex flex-col gap-4 p-6 text-sm sm:flex-row sm:items-center sm:justify-between"
+                className="glass-panel grid gap-4 p-6 text-sm sm:grid-cols-[1.2fr_0.8fr_auto] sm:items-center"
               >
                 <div>
                   <p className="text-xs uppercase tracking-[0.35em] text-vengefulLight">{event.stage}</p>
                   <h3 className="text-xl font-semibold text-white">{event.title}</h3>
                   <p className="text-gray-400">vs {event.opponent}</p>
                 </div>
-                <div className="text-gray-400">
+                <div className="text-center text-gray-400 sm:justify-self-center">
                   <p className="text-base text-white">{formatDate(event.date).dateLabel}</p>
                   <p>{formatDate(event.date).timeLabel}</p>
                 </div>
@@ -372,10 +453,10 @@ export default function Home() {
           <div className="flex flex-col gap-2 text-sm text-gray-400">
             <p className="section-eyebrow">Follow</p>
             <div className="flex gap-4">
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="hover:text-vengefulLight">
+              <a href="https://x.com/VNGFesports" target="_blank" rel="noreferrer" className="hover:text-vengefulLight">
                 Twitter
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-vengefulLight">
+              <a href="https://www.instagram.com/vngfesports/" target="_blank" rel="noreferrer" className="hover:text-vengefulLight">
                 Instagram
               </a>
               <a href="https://twitch.tv" target="_blank" rel="noreferrer" className="hover:text-vengefulLight">

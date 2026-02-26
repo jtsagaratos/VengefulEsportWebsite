@@ -2,6 +2,7 @@ import colinImage from "../../images/logos/colin_image.png";
 import WizardImage from "../../images/logos/wiz_image.jpg";
 import FJImage from "../../images/logos/Flying_Jenn.png";
 import aaptImage from "../../images/logos/aapt_image.png";
+import affeckImage from "../../images/logos/affeck_image.png";
 
 export const navLinks = [
   { label: "Home", href: "/" },
@@ -18,36 +19,42 @@ export const roster = [
     role: "Captain/Vanguard",
     bio: "Precision shot-caller",
     badges: ["Relentless", "Fearless"],
+    image: WizardImage,
   },
   {
     name: "Collin",
     role: "Vanguard",
     bio: "Unwavering Frontline",
     badges: ["Unbreakable", "Unyielding"],
+    image: colinImage,
   },
   {
     name: "Wada124",
     role: "Duelist",
     bio: "Steadfast Pressure",
     badges: ["Ruthless", "Surgical"],
+    image: "/VNGFLogo_1.png",
   },
   {
     name: "Leader",
     role: "Duelist",
     bio: "Calculated Aggression",
     badges: ["Aggressive", "Lethal"],
+    image: "/VNGFLogo_1.png",
   },
   {
     name: "Affekting",
     role: "Strategist",
     bio: "Calm Underfire",
     badges: ["Reliable", "Strategic"],
+    image: affeckImage,
   },
   {
     name: "Death.",
     role: "Strategist",
     bio: "Tempo Control",
     badges: ["Composed", "Consistent"],
+    image: "/VNGFLogo_1.png",
   },
 ];
 

@@ -21,7 +21,7 @@ export default function SchedulePage() {
         <TopNav />
 
         <section className="glass-panel space-y-6 p-10 text-center">
-          <h1 className="text-4xl font-semibold">Upcoming Battles</h1>
+          <h1 className="text-4xl font-semibold">Upcoming Matches</h1>
           {nextEvent && (
             <div className="flex flex-col gap-4 text-sm text-gray-300 md:flex-row md:items-center md:justify-center md:gap-10">
               <div className="space-y-3 text-left">
