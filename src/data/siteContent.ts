@@ -46,6 +46,14 @@ export const roster = [
     image: "/VNGFLogo_1.png",
     achievements: ["Reached top 20 in Hela Phoenix, and Psylocke", "Reached MRC top 16 in season 3"],
   },
+    {
+    name: "SteadyFPS",
+    role: "Duelist (sub)",
+    bio: "Sharp Execution",
+    badges: ["Unstoppable", "Impactful"],
+    image: "/VNGFLogo_1.png",
+    achievements: ["TBD"],
+  },
   {
     name: "Affekting",
     role: "Strategist",
@@ -61,6 +69,14 @@ export const roster = [
     badges: ["Composed", "Consistent"],
     image: "/VNGFLogo_1.png",
     achievements: ["Peaked Rank 1 with multiple Strategist", "Has reached MRC top 8 and top 3"],
+  },
+    {
+    name: "Magidolaon",
+    role: "Strategist (sub)",
+    bio: "Defensive Mastery",
+    badges: ["Poised", "Visionary"],
+    image: "/VNGFLogo_1.png",
+    achievements: ["Placed MRC top 65", "Peaked 15th on Marvels Rivals Leaderboard"],
   },
 ];
 
