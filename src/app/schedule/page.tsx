@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { TopNav } from "@/components/TopNav";
 import { NextEventCountdown } from "@/components/NextEventCountdown";
 import { scheduleEvents } from "@/data/siteContent";
@@ -22,17 +23,31 @@ export default function SchedulePage() {
         <section className="glass-panel space-y-6 p-10 text-center">
           <h1 className="text-4xl font-semibold">Upcoming Battles</h1>
           {nextEvent && (
-            <div className="flex flex-col gap-4 text-sm text-gray-300 md:flex-row md:items-center md:justify-center md:gap-6">
-              <div className="text-left">
-                Next up: <span className="text-white">{nextEvent.title}</span> vs {nextEvent.opponent} on{" "}
-                {new Date(nextEvent.date).toLocaleString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                  hour: "numeric",
-                  minute: "2-digit",
-                })}{" "}
-                ({nextEvent.location})
+            <div className="flex flex-col gap-4 text-sm text-gray-300 md:flex-row md:items-center md:justify-center md:gap-10">
+              <div className="space-y-3 text-left">
+                <div>
+                  Next up: <span className="text-white">{nextEvent.title}</span> on{" "}
+                  {new Date(nextEvent.date).toLocaleString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                    hour: "numeric",
+                    minute: "2-digit",
+                  })}{" "}
+                  ({nextEvent.location})
+                </div>
+                  <div className="flex items-center gap-4 text-lg font-semibold text-white">
+                    <Image
+                      src="/VNGFLogo_1.png"
+                      alt="Vengeful Esports logo"
+                      width={48}
+                      height={48}
+                      className="h-12 w-12 object-contain"
+                    />
+                    <span>VNGFL</span>
+                  <span className="text-xs uppercase tracking-[0.4em] text-gray-500">vs</span>
+                  <span className="text-vengefulLight">{nextEvent.opponent}</span>
+                </div>
               </div>
               <NextEventCountdown targetDate={nextEvent.date} />
             </div>
@@ -47,12 +62,22 @@ export default function SchedulePage() {
                 key={event.date}
                 className="glass-card grid gap-4 p-6 md:grid-cols-[1.2fr_0.8fr]"
               >
-                <div>
+                <div className="space-y-3">
                   <p className="section-heading text-gray-400">{event.stage}</p>
-                  <h3 className="mt-2 text-2xl font-semibold">
-                    {event.title} vs {event.opponent}
-                  </h3>
+                  <h3 className="text-2xl font-semibold">{event.title}</h3>
                   <p className="text-gray-300">{event.location}</p>
+                  <div className="flex items-center gap-4 text-base font-semibold text-white">
+                    <Image
+                      src="/VNGFLogo_1.png"
+                      alt="Vengeful Esports logo"
+                      width={40}
+                      height={40}
+                      className="h-10 w-10 object-contain"
+                    />
+                    <span>VNGFL</span>
+                    <span className="text-xs uppercase tracking-[0.4em] text-gray-500">vs</span>
+                    <span className="text-vengefulLight">{event.opponent}</span>
+                  </div>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
                   <p className="text-lg font-semibold">

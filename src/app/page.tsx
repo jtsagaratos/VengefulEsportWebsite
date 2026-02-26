@@ -1,236 +1,388 @@
 import Image from "next/image";
 import Link from "next/link";
+import { NextEventCountdown } from "@/components/NextEventCountdown";
 import { TopNav } from "@/components/TopNav";
-import { roster, scheduleEvents, sponsors } from "@/data/siteContent";
+import { merch, news, roster, scheduleEvents, sponsors } from "@/data/siteContent";
+
+const statHighlights = [
+  { label: "Matches Played", value: "80+", detail: "since MR S6" },
+  { label: "Win rate", value: "78%", detail: "last 12 months" },
+  { label: "Best Streak", value: "4-0 vs Igni", detail: "since 2026" },
+];
+
+const culturePillars = [
+  {
+    title: "Discipline first",
+    copy: "Repetition builds trust. Every strat is rehearsed until it is instinct.",
+  },
+  {
+    title: "Creative counters",
+    copy: "We weaponize analysts and creators to find new timings weekly.",
+  },
+  {
+    title: "Relentless Execution",
+    copy: "Preparation means nothing without delivery. When the moment comes, we close.",
+  },
+];
+
+const contentHighlights = [
+  {
+    title: "Watch Us Live",
+    copy: "We do play almost daily, tune in and watch us live!",
+    action: "Watch Live",
+    href: "/watch",
+  },
+  {
+    title: "Behind the keyboards",
+    copy: "Instagram reels from events, bootcamps, and fan meetups.",
+    action: "Follow IG",
+    href: "https://instagram.com/vngfesports/",
+  },
+  {
+    title: "Tactical briefing",
+    copy: "Weekly newsletter with opponent scouting reports and drops.",
+    action: "Join List",
+    href: "#subscribe",
+  },
+];
 
 export default function Home() {
-  const upcomingEvents = scheduleEvents.slice(0, 3);
+  const nextEvent = scheduleEvents[0];
+  const upcomingEvents = scheduleEvents.slice(0, 4);
+  const latestNews = news.slice(0, 2);
+  const merchDrops = merch.slice(0, 3);
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) {
+      return { dateLabel: "TBD", timeLabel: "" };
+    }
+    return {
+      dateLabel: date.toLocaleDateString("en-US", { month: "long", day: "numeric" }),
+      timeLabel: date.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }),
+    };
+  };
+
   return (
     <div className="min-h-screen bg-vengefulBlack/70 text-white">
-      <div className="mx-auto flex max-w-6xl flex-col gap-16 px-4 py-10 sm:px-6 lg:px-8">
-        <TopNav />
+      <div className="mx-auto flex max-w-6xl flex-col gap-16 px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+        <TopNav className="pt-6" />
 
         <section
           id="home"
-          className="glass-panel relative overflow-hidden px-6 py-12 text-center sm:px-10"
+          className="grid gap-10 rounded-[36px] border border-white/10 bg-gradient-to-br from-vengefulDark/80 via-vengefulBlack to-black p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] lg:grid-cols-[1.1fr_0.9fr] lg:p-12"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-vengefulDark/70 via-transparent to-vengefulLight/10 pointer-events-none" />
-          <div className="relative space-y-6">
-            <p className="section-heading text-gray-300">
-            Elite Esports Division
-          </p>
-          <h1 className="mt-4 text-4xl font-bold leading-tight sm:text-6xl">
-            Dominate with{" "}
-            <span className="text-vengefulLight">Vengeful Esports</span>
-          </h1>
-          <p className="mx-auto max-w-3xl text-lg text-gray-200">
-            Relentless focus, calculated aggression, and flawless teamwork—tune in
-            as we chase trophies across every global stage.
-          </p>
-          <Link
-            href="/watch"
-            className="inline-flex items-center justify-center rounded-full bg-vengefulLight px-10 py-3 font-semibold text-vengefulBlack transition hover:bg-white"
-          >
-            Watch Live
-          </Link>
-          </div>
-        </section>
-
-        <section id="about" className="space-y-4">
-          <p className="section-heading">
-            About
-          </p>
-          <div className="glass-panel grid gap-8 p-8 md:grid-cols-2">
-            <div>
-              <h2 className="text-3xl font-semibold">Forged in Rivalry</h2>
-            </div>
-            <div className="space-y-4 text-gray-300">
-              <p>
-                Vengeful Esports began as a local squad in 2018 and has evolved into
-                a multi-title contender recognized for disciplined fundamentals and
-                unbeatable clutch instincts.
-              </p>
-              <p>
-                Our mission is simple: elevate every arena we enter by combining
-                talent, innovation, and fearless creativity for fans worldwide.
+          <div className="space-y-8">
+            <div className="badge-pill w-fit">North American Esports Team</div>
+            <div className="space-y-4">
+              <p className="section-eyebrow">Vengeful Esports</p>
+              <h1 className="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+                Command every arena with ruthless precision.
+              </h1>
+              <p className="text-lg text-gray-200">
+                Training blocks, sports science, and fearless creativity collide so our roster can
+                outpace the meta week after week.
               </p>
             </div>
-          </div>
-        </section>
-
-        <section id="roster" className="space-y-8">
-          <p className="section-heading">
-            Roster
-          </p>
-          <div className="grid gap-8 sm:grid-cols-2">
-            {roster.map((player) => (
-              <article
-                key={player.name}
-                className="glass-card p-8 text-lg"
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <Link
+                href="/watch"
+                className="inline-flex items-center justify-center rounded-full bg-vengefulLight px-8 py-3 font-semibold text-vengefulBlack transition hover:bg-white"
               >
-                <div className="flex items-center justify-between">
-                  <h3 className="text-3xl font-bold">{player.name}</h3>
-                  <span className="text-xs uppercase tracking-[0.3em] text-gray-400">
-                    {player.role}
-                  </span>
+                Watch Live
+              </Link>
+              <Link
+                href="/schedule"
+                className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-white transition hover:text-vengefulLight"
+              >
+                Schedule
+              </Link>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-3">
+              {statHighlights.map((stat) => (
+                <div key={stat.label} className="rounded-2xl border border-white/10 bg-black/30 p-4">
+                  <p className="text-sm uppercase tracking-[0.3em] text-gray-400">{stat.label}</p>
+                  <p className="mt-2 text-3xl font-bold text-white">{stat.value}</p>
+                  <p className="text-sm text-gray-500">{stat.detail}</p>
                 </div>
-                <p className="mt-4 text-gray-300">{player.bio}</p>
-              </article>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          <div className="glass-panel relative flex flex-col gap-6 overflow-hidden p-8">
+            <div className="flex items-center justify-between">
+              <p className="section-eyebrow">Next match</p>
+              <span className="text-sm text-gray-400">{nextEvent?.location ?? "TBD"}</span>
+            </div>
+            {nextEvent ? (
+              <>
+                <div className="flex items-center justify-between gap-6">
+                  <div>
+                    <p className="text-lg font-semibold text-white">{nextEvent.title}</p>
+                    <p className="text-sm uppercase tracking-[0.35em] text-gray-500">{nextEvent.stage}</p>
+                    <p className="text-gray-400">
+                      {formatDate(nextEvent.date).dateLabel}
+                      {" "}
+                      <span className="text-gray-500">|</span>
+                      {" "}
+                      {formatDate(nextEvent.date).timeLabel}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <NextEventCountdown targetDate={nextEvent.date} />
+                    <p className="text-xs uppercase tracking-[0.35em] text-gray-500">Countdown</p>
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-black/60 p-6">
+                  <div className="flex items-center justify-between text-2xl font-bold">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.35em] text-gray-500">Vengeful</p>
+                      <p className="text-4xl">0</p>
+                    </div>
+                    <div className="text-xs uppercase tracking-[0.5em] text-gray-500">vs</div>
+                    <div className="text-right">
+                      <p className="text-xs uppercase tracking-[0.35em] text-gray-500">{nextEvent.opponent}</p>
+                      <p className="text-4xl">0</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-3 text-sm text-gray-400">
+                  <div className="badge-pill bg-black/40">MRC</div>
+                  <div className="badge-pill bg-black/40">Double Elimation</div>
+                </div>
+                <Link
+                  href="/schedule"
+                  className="text-xs uppercase tracking-[0.35em] text-vengefulLight hover:text-white"
+                >
+                  View full bracket
+                </Link>
+              </>
+            ) : (
+              <p className="text-gray-400">Stay tuned - new matches drop soon.</p>
+            )}
           </div>
         </section>
 
-        <section className="space-y-8">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <p className="section-heading">
-              Upcoming Events
-            </p>
-            <Link
-              href="/schedule"
-              className="text-xs uppercase tracking-[0.35em] text-gray-400 hover:text-vengefulLight"
-            >
-              Full Schedule
-            </Link>
+        <section className="glass-panel flex flex-col gap-6 px-6 py-8 text-center">
+          <div>
+            <p className="section-eyebrow">Trusted partners</p>
+            <p className="text-sm text-gray-400">Brands that fuel our grind on every continent.</p>
           </div>
-          <div className="grid gap-8 md:grid-cols-3">
-            {upcomingEvents.map((event) => (
-              <article
-                key={event.date}
-                className="glass-card p-8 space-y-4 text-lg"
-              >
-                <p className="section-heading text-gray-400">
-                  {event.stage}
-                </p>
-                <h3 className="text-2xl font-semibold">{event.title}</h3>
-                <p className="text-base text-gray-400">vs {event.opponent}</p>
-                <p className="text-gray-200">
-                  {new Date(event.date).toLocaleDateString("en-US", {
-                    month: "long",
-                    day: "numeric",
-                  })}{" "}
-                  ·{" "}
-                  {new Date(event.date).toLocaleTimeString("en-US", {
-                    hour: "numeric",
-                    minute: "2-digit",
-                  })}
-                </p>
-                <p className="text-xs uppercase tracking-[0.35em] text-gray-500">
-                  {event.location}
-                </p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="space-y-8">
-          <p className="section-heading">
-            Sponsors
-          </p>
-          <div className="grid gap-6 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-6">
             {sponsors.map((brand) => (
-              <div
-                key={brand}
-                className="glass-card px-8 py-10 text-center text-base uppercase tracking-[0.35em] text-gray-200"
-              >
+              <div key={brand} className="rounded-2xl border border-white/5 bg-black/30 px-4 py-3 text-xs uppercase tracking-[0.35em] text-gray-300">
                 {brand}
               </div>
             ))}
           </div>
         </section>
 
-        <section className="space-y-6">
-          <p className="section-heading">
-            Subscribe
-          </p>
-          <div className="glass-panel grid gap-10 p-10 md:grid-cols-[1.1fr_0.9fr] md:items-center">
-            <div className="space-y-4 text-gray-300">
-              <h3 className="text-4xl font-semibold text-white">Signal Briefing</h3>
-              <p className="text-base text-gray-400">
-                Monthly digest with match alerts and merch drops.
-              </p>
+        <section id="about" className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="glass-panel space-y-6 bg-gradient-to-br from-vengefulDark/80 via-black to-black p-10">
+            <p className="section-eyebrow">Inside the program</p>
+            <h2 className="text-3xl font-semibold">Forged through rivalry and relentless review.</h2>
+            <p className="text-gray-300">
+              Vengeful was founded in 2026 and became a home for some of the best players that Marvel Rivals
+              has to offer. Even though this is our first season competing as a team in MRC, we have already
+              proven that we are not a force to be reckoned with.
+            </p>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {culturePillars.map((pillar) => (
+                <div key={pillar.title} className="rounded-2xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-sm font-semibold text-white">{pillar.title}</p>
+                  <p className="mt-2 text-sm text-gray-400">{pillar.copy}</p>
+                </div>
+              ))}
             </div>
-            <form className="flex flex-col items-center gap-3 text-center">
-              <div className="flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
-                <input
-                  type="email"
-                  placeholder="you@example.com"
-                  className="w-full rounded-full border border-vengefulGray bg-vengefulBlack/60 px-8 py-4 text-white placeholder:text-gray-500 focus:border-vengefulLight focus:outline-none text-lg"
-                />
-                <button
-                  type="submit"
-                  className="rounded-full bg-vengefulLight px-8 py-4 text-lg font-semibold text-vengefulBlack transition hover:bg-white sm:w-auto"
-                >
-                  Subscribe
-                </button>
-              </div>
-              <p className="text-xs text-gray-500">
-                We respect your inbox. Unsubscribe anytime.
+          </div>
+          <div className="glass-card relative min-h-[320px] overflow-hidden">
+            <Image
+              src="/background.png"
+              alt="Players on stage"
+              fill
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover opacity-80"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-transparent to-black/40" />
+            <div className="absolute bottom-0 left-0 right-0 p-8">
+              <p className="section-eyebrow">
+                2018 {"->"} today
               </p>
-            </form>
+              <p className="text-2xl font-semibold">From local upstarts to a multi-title powerhouse.</p>
+            </div>
           </div>
         </section>
 
-        <footer className="glass-panel px-6 py-8 text-sm text-gray-200">
-          <div className="flex flex-col gap-6 md:grid md:grid-cols-3 md:items-center">
+        <section id="roster" className="space-y-6">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
-                Contact Us
-              </p>
-              <p className="mt-2 text-lg text-white">vengflesports@gmail.com</p>
+              <p className="section-eyebrow">Roster spotlight</p>
+              <h2 className="text-3xl font-semibold">Talent built to close out finals.</h2>
             </div>
-            <div className="flex flex-col items-center justify-center gap-2 text-center">
-              <Image
-                src="/VNGFLogo_1.png"
-                alt="Vengeful Esports logo"
-                width={100}
-                height={100}
-                className="h-20 w-20 object-contain"
-                priority
-              />
+            <Link href="/roster" className="text-xs uppercase tracking-[0.35em] text-gray-400 hover:text-vengefulLight">
+              Full roster
+            </Link>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {roster.map((player) => (
+              <article key={player.name} className="glass-card flex flex-col gap-4 p-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-2xl font-bold">{player.name}</h3>
+                  <span className="text-xs uppercase tracking-[0.4em] text-gray-500">{player.role}</span>
+                </div>
+                <p className="text-gray-300">{player.bio}</p>
+                <div className="flex flex-wrap gap-3 text-xs text-gray-500">
+                  {(player.badges ?? ["Match ready"]).map((badge) => (
+                    <span key={badge} className="badge-pill bg-black/40">
+                      {badge}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="schedule" className="space-y-6">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="section-eyebrow">Upcoming battles</p>
+              <h2 className="text-3xl font-semibold">Lock in the next watch parties.</h2>
             </div>
-            <div className="flex flex-col items-center gap-2 text-center">
-              <p className="text-xs uppercase tracking-[0.4em] text-vengefulLight">
-                Follow Us
+            <Link href="/schedule" className="text-xs uppercase tracking-[0.35em] text-gray-400 hover:text-vengefulLight">
+              See calendar
+            </Link>
+          </div>
+          <div className="space-y-4">
+            {upcomingEvents.map((event) => (
+              <article
+                key={`${event.date}-${event.opponent}`}
+                className="glass-panel flex flex-col gap-4 p-6 text-sm sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div>
+                  <p className="text-xs uppercase tracking-[0.35em] text-vengefulLight">{event.stage}</p>
+                  <h3 className="text-xl font-semibold text-white">{event.title}</h3>
+                  <p className="text-gray-400">vs {event.opponent}</p>
+                </div>
+                <div className="text-gray-400">
+                  <p className="text-base text-white">{formatDate(event.date).dateLabel}</p>
+                  <p>{formatDate(event.date).timeLabel}</p>
+                </div>
+                <div className="text-right text-xs uppercase tracking-[0.35em] text-gray-500">{event.location}</div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="news" className="space-y-6">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="section-eyebrow">Latest news</p>
+              <h2 className="text-3xl font-semibold">Stories from the road.</h2>
+            </div>
+            <Link href="/news" className="text-xs uppercase tracking-[0.35em] text-gray-400 hover:text-vengefulLight">
+              Browse all
+            </Link>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {latestNews.map((item) => (
+              <article key={item.title} className="glass-card flex flex-col gap-4 p-6">
+                <p className="text-xs uppercase tracking-[0.35em] text-vengefulLight">{item.date}</p>
+                <h3 className="text-2xl font-semibold text-white">{item.title}</h3>
+                <p className="text-gray-300">{item.summary}</p>
+                <Link href="/news" className="text-sm font-semibold text-vengefulLight hover:text-white">
+                  Read more {"->"}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="merch" className="space-y-6">
+          <div className="glass-panel grid gap-10 p-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div className="space-y-4">
+              <p className="section-eyebrow">Merch drop</p>
+              <h2 className="text-3xl font-semibold">Merch coming soon!</h2>
+              <p className="text-gray-300">
+                Rep the crest with limited capsule pieces inspired by our stage fits. Join the waitlist to be first in line.
               </p>
-              <div className="flex gap-4 text-white">
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-vengefulLight"
-                  aria-label="Twitter"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-5 w-5 fill-current"
-                    role="img"
-                    aria-hidden="true"
-                  >
-                    <path d="M17.21 3h3.26l-7.13 8.16L21 21h-5.66l-4.43-5.23L5.73 21H2.47l7.63-8.74L3 3h5.79l4 4.72zm-1.14 15.3h1.81L7.07 4.61H5.15z" />
-                  </svg>
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-vengefulLight"
-                  aria-label="Instagram"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-5 w-5 fill-current"
-                    role="img"
-                    aria-hidden="true"
-                  >
-                    <path d="M7 2h10c2.76 0 5 2.24 5 5v10c0 2.76-2.24 5-5 5H7c-2.76 0-5-2.24-5-5V7c0-2.76 2.24-5 5-5zm0 2C5.35 4 4 5.35 4 7v10c0 1.65 1.35 3 3 3h10c1.65 0 3-1.35 3-3V7c0-1.65-1.35-3-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zm6-3.75a1 1 0 1 1-1 1 1 1 0 0 1 1-1z" />
-                  </svg>
-                </a>
-              </div>
+              <Link
+                href="/merch"
+                className="inline-flex items-center justify-center rounded-full bg-vengefulLight px-6 py-3 text-sm font-semibold text-vengefulBlack transition hover:bg-white"
+              >
+                Join waitlist
+              </Link>
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {merchDrops.map((item) => (
+                <div key={item.label} className="rounded-2xl border border-white/10 bg-black/40 p-4">
+                  <p className="text-sm uppercase tracking-[0.35em] text-gray-500">{item.status}</p>
+                  <p className="mt-2 text-xl font-semibold text-white">{item.label}</p>
+                  <p className="text-sm text-gray-400">{item.price}</p>
+                </div>
+              ))}
             </div>
           </div>
-          <p className="mt-6 text-gray-400">
-            © {new Date().getFullYear()} Vengeful Esports. All rights reserved.
-          </p>
+        </section>
+
+        <section className="grid gap-6 lg:grid-cols-3">
+          {contentHighlights.map((item) => (
+            <article key={item.title} className="glass-card flex flex-col gap-4 p-6">
+              <p className="section-eyebrow">Content</p>
+              <h3 className="text-2xl font-semibold text-white">{item.title}</h3>
+              <p className="text-gray-300">{item.copy}</p>
+              <Link href={item.href} className="text-sm font-semibold text-vengefulLight hover:text-white">
+                {item.action} {"->"}
+              </Link>
+            </article>
+          ))}
+        </section>
+
+        <section id="subscribe" className="glass-panel space-y-6 p-10">
+          <div className="flex flex-col gap-2 text-center">
+            <p className="section-eyebrow">Signal briefing</p>
+            <h2 className="text-3xl font-semibold">Monthly digest with match alerts and drops.</h2>
+            <p className="text-sm text-gray-400">Zero spam, just the intel we would want as fans.</p>
+          </div>
+          <form className="mx-auto flex w-full max-w-2xl flex-col gap-4 sm:flex-row">
+            <input
+              type="email"
+              className="w-full rounded-full border border-white/10 bg-black/40 px-6 py-4 text-white placeholder:text-gray-500 focus:border-vengefulLight focus:outline-none"
+              placeholder="you@example.com"
+            />
+            <button
+              type="submit"
+              className="rounded-full bg-vengefulLight px-8 py-4 text-sm font-semibold text-vengefulBlack transition hover:bg-white"
+            >
+              Subscribe
+            </button>
+          </form>
+        </section>
+
+        <footer className="glass-panel grid gap-8 px-8 py-10 md:grid-cols-3">
+          <div className="space-y-2">
+            <p className="section-eyebrow">Contact</p>
+            <p className="text-lg text-white">vengflesports@gmail.com</p>
+          </div>
+          <div className="flex flex-col items-center gap-3 text-center">
+            <Image src="/VNGFLogo_1.png" alt="Vengeful Esports logo" width={96} height={96} className="h-20 w-20 object-contain" />
+            <p className="text-xs text-gray-500">(c) {new Date().getFullYear()} Vengeful Esports</p>
+          </div>
+          <div className="flex flex-col gap-2 text-sm text-gray-400">
+            <p className="section-eyebrow">Follow</p>
+            <div className="flex gap-4">
+              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="hover:text-vengefulLight">
+                Twitter
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-vengefulLight">
+                Instagram
+              </a>
+              <a href="https://twitch.tv" target="_blank" rel="noreferrer" className="hover:text-vengefulLight">
+                Twitch
+              </a>
+            </div>
+          </div>
         </footer>
       </div>
     </div>

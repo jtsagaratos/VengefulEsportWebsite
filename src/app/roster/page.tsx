@@ -16,7 +16,7 @@ export default function RosterPage() {
         <section className="space-y-6">
           <div>
             <p className="section-heading">Roster</p>
-            <h1 className="mt-3 text-4xl font-semibold">Alpha Unit</h1>
+            <h1 className="mt-3 text-4xl font-semibold">Meet the Team!</h1>
             <p className="mt-2 text-gray-300">
               Built on chemistry, discipline, and fearless entries.
             </p>
@@ -32,7 +32,7 @@ export default function RosterPage() {
                 </div>
                 <p className="text-gray-300">{player.bio}</p>
                 <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-gray-400">
-                  Highlights and match stats coming soon.
+                  Highlights and match stats coming soon!
                 </div>
               </article>
             ))}

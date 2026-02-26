@@ -20,8 +20,7 @@ export default function WatchPage() {
           <p className="section-heading">Watch</p>
           <h1 className="text-4xl font-semibold">Live On Twitch</h1>
           <p className="text-lg text-gray-200">
-            Follow our creators to catch scrims, ranked grinds, and match-day prep live.
-            Times are listed in Pacific Time.
+            Follow our players to catch scrims, ranked grinds, and match-day prep live!
           </p>
         </section>
 

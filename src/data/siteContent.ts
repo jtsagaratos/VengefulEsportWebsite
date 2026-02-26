@@ -1,3 +1,8 @@
+import colinImage from "../../images/logos/colin_image.png";
+import WizardImage from "../../images/logos/wiz_image.jpg";
+import FJImage from "../../images/logos/Flying_Jenn.png";
+import aaptImage from "../../images/logos/aapt_image.png";
+
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
@@ -8,10 +13,42 @@ export const navLinks = [
 ];
 
 export const roster = [
-  { name: "Phantom", role: "Captain", bio: "Precision shot-caller" },
-  { name: "Blaze", role: "Entry", bio: "Explosive openers" },
-  { name: "Nova", role: "Support", bio: "Utility mastermind" },
-  { name: "Vex", role: "Anchor", bio: "Clutch defense" },
+  {
+    name: "WizardDread",
+    role: "Captain/Vanguard",
+    bio: "Precision shot-caller",
+    badges: ["Relentless", "Fearless"],
+  },
+  {
+    name: "Collin",
+    role: "Vanguard",
+    bio: "Unwavering Frontline",
+    badges: ["Unbreakable", "Unyielding"],
+  },
+  {
+    name: "Wada124",
+    role: "Duelist",
+    bio: "Steadfast Pressure",
+    badges: ["Ruthless", "Surgical"],
+  },
+  {
+    name: "Leader",
+    role: "Duelist",
+    bio: "Calculated Aggression",
+    badges: ["Aggressive", "Lethal"],
+  },
+  {
+    name: "Affekting",
+    role: "Strategist",
+    bio: "Calm Underfire",
+    badges: ["Reliable", "Strategic"],
+  },
+  {
+    name: "Death.",
+    role: "Strategist",
+    bio: "Tempo Control",
+    badges: ["Composed", "Consistent"],
+  },
 ];
 
 export const merch = [
@@ -33,58 +70,85 @@ export const news = [
   },
 ];
 
-export const sponsors = ["Apex Gear", "Volt Energy", "Stratus Tech"];
+export const sponsors = ["Email us for sponsorship information!", "Your logo could be here!"];
 
 export const streams = [
   {
-    name: "Phantom",
+    name: "Collin",
     platform: "Twitch",
-    url: "https://twitch.tv/phantom",
-    channel: "phantom",
+    url: "https://www.twitch.tv/fpscollin",
+    channel: "fpscollin",
     isLive: true,
-    logo:
-      "https://static-cdn.jtvnw.net/jtv_user_pictures/phantom-profile_image-6f5b5b1dc54a4f07-70x70.png",
+    logo: colinImage,
   },
   {
-    name: "Nova",
+    name: "Wada124",
     platform: "Twitch",
-    url: "https://twitch.tv/nova",
-    channel: "nova",
+    url: "https://www.twitch.tv/wada124",
+    channel: "wada124",
     isLive: false,
-    logo:
-      "https://static-cdn.jtvnw.net/jtv_user_pictures/nova-profile_image-a3b2c5d4ef678901-70x70.png",
+    logo: "/VNGFLogo_1.png",
   },
   {
-    name: "Vex",
+    name: "WizardDread",
     platform: "Twitch",
-    url: "https://twitch.tv/vex",
-    channel: "vex",
+    url: "https://www.twitch.tv/wizarddread_",
+    channel: "wizarddread_",
     isLive: false,
-    logo:
-      "https://static-cdn.jtvnw.net/jtv_user_pictures/vex-profile_image-9f1c2d3e4a5b6780-70x70.png",
+    logo: WizardImage,
+  },
+  {
+    name: "FlyingJenn",
+    platform: "Twitch",
+    url: "https://www.twitch.tv/flyingJenn",
+    channel: "flyingjenn",
+    isLive: false,
+    logo: FJImage,
+  },
+  {
+    name: "aapt",
+    platform: "Twitch",
+    url: "https://www.twitch.tv/itzaapt",
+    channel: "itzaapt",
+    isLive: false,
+    logo: aaptImage,
   },
 ];
 
 export const scheduleEvents = [
   {
-    title: "Pacific Clash - Group Stage",
-    opponent: "Tokyo Ronin",
-    date: "2026-03-05T18:00:00-08:00",
-    location: "Los Angeles",
-    stage: "Group A",
+    title: "MRC Season 6",
+    opponent: "C.M.B",
+    date: "2026-02-28T17:00:00-08:00",
+    location: "Marvel Rivals Championships",
+    stage: "Double Elimination Round",
   },
   {
-    title: "Pacific Clash - Group Stage",
-    opponent: "Seoul Dynasty X",
-    date: "2026-03-10T19:30:00-08:00",
-    location: "Los Angeles",
-    stage: "Group A",
+    title: "MRC Season 6",
+    opponent: "TBD",
+    date: "2026-03-01T19:30:00-08:00",
+    location: "Marvel Rivals Championships",
+    stage: "Double Elimination Round",
   },
   {
-    title: "Major Qualifier - Upper Semi",
-    opponent: "Berlin Kismet",
-    date: "2026-03-21T12:00:00-08:00",
-    location: "Seattle",
-    stage: "Qualifier",
+    title: "MRC Season 6",
+    opponent: "TBD",
+    date: "2026-03-07T19:30:00-08:00",
+    location: "Marvel Rivals Championships",
+    stage: "Double Elimination Round",
+  },
+    {
+    title: "MRC Season 6",
+    opponent: "TBD",
+    date: "2026-03-14T19:30:00-08:00",
+    location: "Marvel Rivals Championships",
+    stage: "Best of 5",
+  },
+      {
+    title: "MRC Season 6",
+    opponent: "TBD",
+    date: "2026-03-15T19:30:00-08:00",
+    location: "Marvel Rivals Championships",
+    stage: "Best of 5",
   },
 ];

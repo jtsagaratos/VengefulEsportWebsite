@@ -7,9 +7,7 @@ export const metadata: Metadata = {
 };
 
 const milestones = [
-  { year: "2018", detail: "Grassroots LAN squad forms in Seattle." },
-  { year: "2021", detail: "First international trophy secured." },
-  { year: "2025", detail: "Opened a 7k sq. ft. performance facility." },
+  { year: "Mid FEB 2026", detail: "VNGFL enters first MRC, placing 2nd in Open Qualifiers" },
 ];
 
 export default function AboutPage() {
@@ -28,11 +26,16 @@ export default function AboutPage() {
             refining every round. Years later, we are a multi-title contender that
             blends sports science, data, and bold creativity to entertain millions.
           </p>
-          <p className="text-lg text-gray-300">
-            Our culture rewards relentless practice, genuine chemistry, and
-            fearless innovation. Every member—players, staff, and fans—contributes
-            to the momentum we bring onto the stage.
-          </p>
+          <div className="space-y-3">
+            <h2 className="text-3xl font-semibold text-white">Mission Statement</h2>
+            <p className="text-lg text-gray-300">
+              Vengeful Esports is committed to competing at the highest level while developing
+              disciplined, resilient competitors through structured growth, strategic preparation,
+              and relentless improvement. We build a culture where performance is earned daily,
+              teamwork is intentional, and success is sustained through constant evolution.
+            </p>
+          </div>
+
         </section>
 
         <section className="glass-panel p-8 space-y-6">
@@ -46,22 +49,79 @@ export default function AboutPage() {
               <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
                 Owner
               </p>
-              <h3 className="text-2xl font-semibold">Avery “Venge” Cole</h3>
+              <h3 className="text-2xl font-semibold">Aapt</h3>
               <p className="text-gray-300">
-                Former FPS pro who founded Vengeful in 2018 with the vision of blending
-                data science and sports psychology to build disciplined, fearless rosters.
-                Oversees competitive direction, brand partnerships, and player development.
+                Aapt set out to build a world-class esports organization, and in February 2026, 
+                that vision became reality with the founding of Vengeful Esports.
               </p>
             </article>
             <article className="glass-card p-6 space-y-3">
               <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
                 Co-Owner
               </p>
-              <h3 className="text-2xl font-semibold">Maya “Pulse” Serrano</h3>
+              <h3 className="text-2xl font-semibold">FlyingJenn</h3>
               <p className="text-gray-300">
-                Veteran operations lead who joined in 2020 to architect the organization’s
-                content studio and performance facility. Handles talent scouting, broadcast
-                strategy, and community initiatives.
+                FlyingJenn helped found Vengeful Esports in 2026 with a clear mission: 
+                assemble elite talent and build a team culture rooted in growth and performance. 
+                A proud USAF veteran, she continues to serve while leading with discipline and purpose. 
+                Having played Marvel Rivals since Season 0, she enjoys flexing multiple roles and adapting 
+                to whatever the team requires.
+              </p>
+            </article>
+            <article className="glass-card p-6 space-y-3">
+              <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
+                Coach
+              </p>
+              <h3 className="text-2xl font-semibold">Ashh</h3>
+              <p className="text-gray-300">
+                TBD
+              </p>
+            </article>
+            <article className="glass-card p-6 space-y-3">
+              <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
+                Assistant Coach
+              </p>
+              <h3 className="text-2xl font-semibold">Boomed</h3>
+              <p className="text-gray-300">
+                TBD
+              </p>
+            </article>
+                        <article className="glass-card p-6 space-y-3">
+              <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
+                Manager
+              </p>
+              <h3 className="text-2xl font-semibold">Lea</h3>
+              <p className="text-gray-300">
+                TBD
+              </p>
+            </article>
+                        <article className="glass-card p-6 space-y-3">
+              <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
+                Analyst
+              </p>
+              <h3 className="text-2xl font-semibold">Yeby</h3>
+              <p className="text-gray-300">
+                TBD
+              </p>
+            </article>
+                        <article className="glass-card p-6 space-y-3">
+              <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
+                Analyst
+              </p>
+              <h3 className="text-2xl font-semibold">Hellfired</h3>
+              <p className="text-gray-300">
+                Hellfired has been an analyst for Vengeful since its inception in 2026.
+                He has achieved top 300 in Overwatch as a DPS player.
+                He is also a former Olympian trainee and has won multiple awards and competitions in his sport. 
+              </p>
+            </article>
+                        <article className="glass-card p-6 space-y-3">
+              <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
+                TBD
+              </p>
+              <h3 className="text-2xl font-semibold">Mr.Vexer</h3>
+              <p className="text-gray-300">
+                TBD
               </p>
             </article>
           </div>
