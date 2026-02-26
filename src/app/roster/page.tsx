@@ -31,8 +31,17 @@ export default function RosterPage() {
                   </span>
                 </div>
                 <p className="text-gray-300">{player.bio}</p>
-                <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-gray-400">
-                  Highlights and match stats coming soon!
+                <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-gray-200">
+                  <p className="text-xs uppercase tracking-[0.35em] text-vengefulLight">Highlights</p>
+                  {player.achievements?.length ? (
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-gray-300">
+                      {player.achievements.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="mt-2 text-gray-400">Highlights and match stats coming soon!</p>
+                  )}
                 </div>
               </article>
             ))}

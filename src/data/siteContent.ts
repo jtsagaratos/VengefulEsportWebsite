@@ -20,6 +20,7 @@ export const roster = [
     bio: "Precision shot-caller",
     badges: ["Relentless", "Fearless"],
     image: WizardImage,
+    achievements: ["Ended season 6 as rank 88", "Has reached MRC top 16, top 8, and top 6"],
   },
   {
     name: "Collin",
@@ -27,6 +28,7 @@ export const roster = [
     bio: "Unwavering Frontline",
     badges: ["Unbreakable", "Unyielding"],
     image: colinImage,
+    achievements: ["Achieved top 10 with Emma and Groot", "Has reached MRC top 6 in season 4 and 5"],
   },
   {
     name: "Wada124",
@@ -34,6 +36,7 @@ export const roster = [
     bio: "Steadfast Pressure",
     badges: ["Ruthless", "Surgical"],
     image: "/VNGFLogo_1.png",
+    achievements: ["Finishes every season OAA", "Peaked rank 1 on leaderboard in season 4.5"],
   },
   {
     name: "Leader",
@@ -41,6 +44,7 @@ export const roster = [
     bio: "Calculated Aggression",
     badges: ["Aggressive", "Lethal"],
     image: "/VNGFLogo_1.png",
+    achievements: ["Reached top 20 in Hela Phoenix, and Psylocke", "Reached MRC top 16 in season 3"],
   },
   {
     name: "Affekting",
@@ -48,6 +52,7 @@ export const roster = [
     bio: "Calm Underfire",
     badges: ["Reliable", "Strategic"],
     image: affeckImage,
+    achievements: ["Season 2.5 Top 10 Loki/Invis/Luna", "Won MRC Season 1"],
   },
   {
     name: "Death.",
@@ -55,6 +60,7 @@ export const roster = [
     bio: "Tempo Control",
     badges: ["Composed", "Consistent"],
     image: "/VNGFLogo_1.png",
+    achievements: ["Peaked Rank 1 with multiple Strategist", "Has reached MRC top 8 and top 3"],
   },
 ];
 

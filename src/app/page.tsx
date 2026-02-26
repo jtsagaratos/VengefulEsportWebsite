@@ -7,7 +7,7 @@ import { merch, news, roster, scheduleEvents, sponsors, streams } from "@/data/s
 const statHighlights = [
   { label: "Matches Played", value: "80+", detail: "since MR S6" },
   { label: "Win rate", value: "78%", detail: "last 12 months" },
-  { label: "Best Streak", value: "4-0 vs Igni", detail: "since 2026" },
+  { label: "Games Swept", value: "40+", detail: "since 2026" },
 ];
 
 const culturePillars = [
@@ -131,14 +131,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="glass-panel relative flex flex-col gap-6 overflow-hidden p-8">
+          <div className="glass-panel relative flex flex-col gap-4 overflow-hidden p-6">
             <div className="flex items-center justify-between">
               <p className="section-eyebrow">Next match</p>
               <span className="text-sm text-gray-400">{nextEvent?.location ?? "TBD"}</span>
             </div>
             {nextEvent ? (
               <>
-                <div className="flex items-center justify-between gap-6">
+                <div className="flex flex-col gap-4">
                   <div>
                     <p className="text-lg font-semibold text-white">{nextEvent.title}</p>
                     <p className="text-sm uppercase tracking-[0.35em] text-gray-500">{nextEvent.stage}</p>
@@ -150,12 +150,12 @@ export default function Home() {
                       {formatDate(nextEvent.date).timeLabel}
                     </p>
                   </div>
-                  <div className="text-right">
+                  <div className="flex flex-col gap-1 text-xs uppercase tracking-[0.35em] text-gray-500">
+                    <span>Countdown</span>
                     <NextEventCountdown targetDate={nextEvent.date} />
-                    <p className="text-xs uppercase tracking-[0.35em] text-gray-500">Countdown</p>
                   </div>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-black/60 p-6">
+                <div className="rounded-2xl border border-white/10 bg-black/60 p-4">
                   <div className="flex items-end justify-between text-2xl font-bold">
                     <div className="flex items-end gap-4">
                       <div className="translate-y-2">
@@ -176,7 +176,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-3 text-sm text-gray-400">
+                <div className="flex flex-wrap gap-2 text-sm text-gray-400">
                   <div className="badge-pill bg-black/40">MRC</div>
                   <div className="badge-pill bg-black/40">Double Elimination</div>
                 </div>
