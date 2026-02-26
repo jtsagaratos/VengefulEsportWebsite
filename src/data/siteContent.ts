@@ -36,7 +36,7 @@ export const roster = [
     bio: "Steadfast Pressure",
     badges: ["Ruthless", "Surgical"],
     image: "/VNGFLogo_1.png",
-    achievements: ["Finishes every season OAA", "Peaked rank 1 on leaderboard in season 4.5"],
+    achievements: ["Won the Jay3 Community Clash Tournament", "Peaked rank 1 on leaderboard in season 4.5"],
   },
   {
     name: "Leader",
@@ -72,14 +72,9 @@ export const merch = [
 
 export const news = [
   {
-    title: "Vengeful punches ticket to Champions",
-    date: "January 25, 2026",
-    summary: "A flawless lower-bracket run locks our Worlds slot.",
-  },
-  {
-    title: "State-of-the-art training facility revealed",
-    date: "December 18, 2025",
-    summary: "7000 sq. ft. performance center launches in Los Angeles.",
+    title: "Vengeful finishes MRC Open Qualifiers 2nd place!",
+    date: "February  14, 2026",
+    summary: "Vengeful Esports made its MRC debut in dominant fashion. The team stormed through the Open Qualifiers with a perfect 10–0 record, securing their place in the double-elimination stage without dropping a single match. Their next challenge awaits on February 28th, where they’ll face C.M.B in what promises to be a high-stakes showdown.",
   },
 ];
 

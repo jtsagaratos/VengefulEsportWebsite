@@ -31,7 +31,6 @@ export default function NewsPage() {
                 <h2 className="text-2xl font-semibold">{item.title}</h2>
                 <p className="text-gray-300">{item.summary}</p>
                 <div className="text-sm text-gray-500">
-                  Full article coming soon.
                 </div>
               </article>
             ))}

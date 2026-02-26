@@ -99,11 +99,10 @@ export default function Home() {
             <div className="space-y-4">
               <p className="section-eyebrow">Vengeful Esports</p>
               <h1 className="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
-                Command every arena with ruthless precision.
+                Compete with purpose. Win with intent.
               </h1>
               <p className="text-lg text-gray-200">
-                Training blocks, sports science, and fearless creativity collide so our roster can
-                outpace the meta week after week.
+                We prepare with structure, adapt with precision, and execute when it matters most.
               </p>
             </div>
             <div className="flex flex-col gap-4 sm:flex-row">
@@ -210,7 +209,7 @@ export default function Home() {
         <section id="about" className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
           <div className="glass-panel space-y-6 bg-gradient-to-br from-vengefulDark/80 via-black to-black p-10 lg:h-[540px]">
             <p className="section-eyebrow">Inside the program</p>
-            <h2 className="text-3xl font-semibold">Forged through rivalry and relentless review.</h2>
+            <h2 className="text-3xl font-semibold">Where Strength Becomes Dominance.</h2>
             <p className="text-gray-300">
               Vengeful was founded in 2026 and became a home for some of the best players that Marvel Rivals
               has to offer. Even though this is our first season competing as a team in MRC, we have already
@@ -458,9 +457,6 @@ export default function Home() {
               </a>
               <a href="https://www.instagram.com/vngfesports/" target="_blank" rel="noreferrer" className="hover:text-vengefulLight">
                 Instagram
-              </a>
-              <a href="https://twitch.tv" target="_blank" rel="noreferrer" className="hover:text-vengefulLight">
-                Twitch
               </a>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { TopNav } from "@/components/TopNav";
 import { roster } from "@/data/siteContent";
 
@@ -23,25 +24,36 @@ export default function RosterPage() {
           </div>
           <div className="grid gap-6">
             {roster.map((player) => (
-              <article key={player.name} className="glass-card p-6 space-y-3">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-2xl font-bold">{player.name}</h2>
-                  <span className="text-xs uppercase tracking-[0.3em] text-gray-400">
-                    {player.role}
-                  </span>
+              <article key={player.name} className="glass-card flex flex-col gap-5 p-6 sm:flex-row sm:items-center">
+                <div className="flex-shrink-0">
+                  <Image
+                    src={player.image ?? "/VNGFLogo_1.png"}
+                    alt={`${player.name} avatar`}
+                    width={112}
+                    height={112}
+                    className="h-28 w-28 rounded-3xl border border-white/10 object-cover"
+                  />
                 </div>
-                <p className="text-gray-300">{player.bio}</p>
-                <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-gray-200">
-                  <p className="text-xs uppercase tracking-[0.35em] text-vengefulLight">Highlights</p>
-                  {player.achievements?.length ? (
-                    <ul className="mt-2 list-disc space-y-1 pl-5 text-gray-300">
-                      {player.achievements.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="mt-2 text-gray-400">Highlights and match stats coming soon!</p>
-                  )}
+                <div className="flex-1 space-y-4">
+                  <div className="flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
+                    <h2 className="text-2xl font-bold">{player.name}</h2>
+                    <span className="text-xs uppercase tracking-[0.3em] text-gray-400">
+                      {player.role}
+                    </span>
+                  </div>
+                  <p className="text-gray-300">{player.bio}</p>
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-gray-200">
+                    <p className="text-xs uppercase tracking-[0.35em] text-vengefulLight">Highlights</p>
+                    {player.achievements?.length ? (
+                      <ul className="mt-2 list-disc space-y-1 pl-5 text-gray-300">
+                        {player.achievements.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="mt-2 text-gray-400">Highlights and match stats coming soon!</p>
+                    )}
+                  </div>
                 </div>
               </article>
             ))}
