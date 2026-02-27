@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 export default function NewsPage() {
   return (
     <div className="min-h-screen bg-vengefulBlack/70 text-white">
-      <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-10 sm:px-6 lg:px-8">
-        <TopNav />
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 pb-12 pt-0 sm:gap-8 sm:px-6 sm:pt-0 lg:gap-10 lg:px-8">
+        <TopNav className="-mt-4 sm:-mt-2 lg:-mt-24" />
 
         <section className="space-y-6">
           <div>
