@@ -36,12 +36,18 @@ async function fetchScheduleFromGoogle(): Promise<ScheduleEvent[]> {
         if (!parsedDate || Number.isNaN(parsedDate.getTime())) {
           return null;
         }
+        const safeString = (value: string | number | undefined) =>
+          typeof value === "number" ? String(value) : value ?? "";
+        const titleLabel = safeString(title).trim();
+        const opponentLabel = safeString(opponent).trim();
+        const locationLabel = safeString(location).trim();
+        const stageLabel = safeString(stage).trim();
         return {
-          title: title?.trim() || "TBD",
-          opponent: opponent?.trim() || "TBD",
+          title: titleLabel || "TBD",
+          opponent: opponentLabel || "TBD",
           date: parsedDate.toISOString(),
-          location: location?.trim() || "TBD",
-          stage: stage?.trim() || "TBD",
+          location: locationLabel || "TBD",
+          stage: stageLabel || "TBD",
         } satisfies ScheduleEvent;
       })
       .filter((event): event is ScheduleEvent => Boolean(event));
