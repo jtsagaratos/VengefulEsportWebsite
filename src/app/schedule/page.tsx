@@ -60,13 +60,15 @@ export default function SchedulePage() {
             {sortedEvents.map((event) => (
               <article
                 key={event.date}
-                className="glass-card grid gap-4 p-6 md:grid-cols-[1.2fr_0.8fr]"
+                className="glass-card p-6"
               >
-                <div className="space-y-3">
-                  <p className="section-heading text-gray-400">{event.stage}</p>
-                  <h3 className="text-2xl font-semibold">{event.title}</h3>
-                  <p className="text-gray-300">{event.location}</p>
-                  <div className="flex items-center gap-4 text-base font-semibold text-white">
+                <div className="grid gap-6 md:grid-cols-[1fr_auto_1fr] md:items-center">
+                  <div className="space-y-3">
+                    <p className="section-heading text-gray-400">{event.stage}</p>
+                    <h3 className="text-2xl font-semibold">{event.title}</h3>
+                    <p className="text-gray-300">{event.location}</p>
+                  </div>
+                  <div className="flex items-center justify-center gap-4 text-base font-semibold text-white text-center">
                     <Image
                       src="/VNGFLogo_1.png"
                       alt="Vengeful Esports logo"
@@ -78,21 +80,22 @@ export default function SchedulePage() {
                     <span className="text-xs uppercase tracking-[0.4em] text-gray-500">vs</span>
                     <span className="text-vengefulLight">{event.opponent}</span>
                   </div>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
-                  <p className="text-lg font-semibold">
-                    {new Date(event.date).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </p>
-                  <p className="text-sm text-gray-300">
-                    {new Date(event.date).toLocaleTimeString("en-US", {
-                      hour: "numeric",
-                      minute: "2-digit",
-                      timeZoneName: "short",
-                    })}
-                  </p>
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center md:justify-self-end">
+                    <p className="text-lg font-semibold">
+                      {new Date(event.date).toLocaleDateString("en-US", {
+                        weekday: "short",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </p>
+                    <p className="text-sm text-gray-300">
+                      {new Date(event.date).toLocaleTimeString("en-US", {
+                        hour: "numeric",
+                        minute: "2-digit",
+                        timeZoneName: "short",
+                      })}
+                    </p>
+                  </div>
                 </div>
               </article>
             ))}

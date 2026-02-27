@@ -3,14 +3,30 @@ import Image from "next/image";
 import Link from "next/link";
 import { TopNav } from "@/components/TopNav";
 import { streams } from "@/data/siteContent";
+import { fetchLiveStatuses } from "@/lib/twitch";
 
 export const metadata: Metadata = {
   title: "Watch | Vengeful Esports",
   description: "Catch our top players live on Twitch.",
 };
 
-export default function WatchPage() {
-  const liveStream = streams.find((stream) => stream.isLive);
+export const revalidate = 60;
+
+export default async function WatchPage() {
+  const fetchedStatuses = await fetchLiveStatuses(streams.map((stream) => stream.channel.toLowerCase()));
+  const statusMap = { ...fetchedStatuses };
+  if (process.env.FORCE_COLIN_LIVE === "true") {
+    statusMap.fpscollin = true;
+  }
+  const hydratedStreams = streams.map((stream) => {
+    const liveState = statusMap[stream.channel.toLowerCase()];
+    return {
+      ...stream,
+      isLive: Boolean(liveState),
+    };
+  });
+
+  const liveStream = hydratedStreams.find((stream) => stream.isLive);
   return (
     <div className="min-h-screen bg-vengefulBlack/70 text-white">
       <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-10 sm:px-6 lg:px-8">
@@ -52,7 +68,7 @@ export default function WatchPage() {
         </section>
 
         <section className="grid gap-6 md:grid-cols-3">
-          {streams.map((stream) => (
+          {hydratedStreams.map((stream) => (
             <article
               key={stream.url}
               className="glass-card flex flex-col gap-4 p-6 hover:-translate-y-1 transition"
