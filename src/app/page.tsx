@@ -9,7 +9,7 @@ import { getScheduleEvents } from "@/lib/schedule";
 
 const statHighlights = [
   { label: "Matches Played", value: "80+", detail: "since MR S6" },
-  { label: "Win rate", value: "78%", detail: "last 12 months" },
+  { label: "Win rate", value: "80%", detail: "last 12 months" },
   { label: "Games Swept", value: "40+", detail: "since 2026" },
 ];
 

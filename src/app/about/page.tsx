@@ -102,7 +102,7 @@ export default function AboutPage() {
               </p>
               <h3 className="text-2xl font-semibold">Yeby</h3>
               <p className="text-gray-300">
-                TBD
+                Yeby is one of Vengeful’s Analysts, focusing on data-driven insights that sharpen strategy and performance. Currently studying Data Science, he thrives on breaking down numbers to find competitive edges. Outside of analytics, he enjoys cooking and gaming.
               </p>
             </article>
                         <article className="glass-card p-6 space-y-3">
