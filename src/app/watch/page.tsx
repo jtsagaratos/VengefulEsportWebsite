@@ -27,6 +27,14 @@ export default async function WatchPage() {
   });
 
   const liveStream = hydratedStreams.find((stream) => stream.isLive);
+  // Twitch requires explicit parent domains; merge defaults with optional env overrides.
+  const defaultParents = ["localhost", "vengeful.gg", "www.vengeful.gg"];
+  const envParents = (process.env.NEXT_PUBLIC_TWITCH_PARENT_DOMAINS ?? "")
+    .split(",")
+    .map((domain) => domain.trim())
+    .filter(Boolean);
+  const embedParents = Array.from(new Set([...defaultParents, ...envParents]));
+  const parentQuery = embedParents.map((parent) => `parent=${encodeURIComponent(parent)}`).join("&");
   return (
     <div className="min-h-screen bg-vengefulBlack/70 text-white">
       <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-10 sm:px-6 lg:px-8">
@@ -55,7 +63,7 @@ export default async function WatchPage() {
             <div className="aspect-video w-full overflow-hidden rounded-2xl border border-white/10">
               <iframe
                 title={`${liveStream.name} Twitch Stream`}
-                src={`https://player.twitch.tv/?channel=${liveStream.channel}&parent=localhost&parent=vengeful.gg`}
+                src={`https://player.twitch.tv/?channel=${liveStream.channel}&${parentQuery}`}
                 allowFullScreen
                 className="h-full w-full"
               />
