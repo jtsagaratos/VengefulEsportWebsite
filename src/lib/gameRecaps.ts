@@ -55,11 +55,16 @@ async function fetchRecapsFromGoogle(): Promise<GameRecap[]> {
         if (!parsedDate || Number.isNaN(parsedDate.getTime())) {
           return null;
         }
+        const safeString = (value: string | number | undefined) =>
+          typeof value === "number" ? String(value) : value ?? "";
+        const opponentLabel = safeString(opponent).trim();
+        const eventLabel = safeString(event).trim();
+        const resultLabel = safeString(result).trim();
         return {
-          opponent: opponent?.trim() || "TBD",
-          event: event?.trim() || "TBD",
+          opponent: opponentLabel || "TBD",
+          event: eventLabel || "TBD",
           date: parsedDate.toISOString(),
-          result: result?.trim() || "TBD",
+          result: resultLabel || "TBD",
         } satisfies GameRecap;
       })
       .filter((recap): recap is GameRecap => Boolean(recap));
