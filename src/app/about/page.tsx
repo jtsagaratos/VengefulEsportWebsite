@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { TopNav } from "@/components/TopNav";
+import { streams } from "@/data/siteContent";
+import { TwitchIcon } from "@/components/TwitchIcon";
 
 export const metadata: Metadata = {
   title: "About | Vengeful Esports",
@@ -9,6 +11,49 @@ export const metadata: Metadata = {
 const milestones = [
   { year: "FEB 2026", detail: "Vengeful Esports is founded" },
   { year: "Mid FEB 2026", detail: "VNGFL enters first MRC, placing 2nd in Open Qualifiers" },
+];
+
+const staff = [
+  {
+    role: "Owner",
+    name: "Aapt",
+    bio: "Aapt set out to build a world-class esports organization, and in February 2026, that vision became reality with the founding of Vengeful Esports.",
+  },
+  {
+    role: "Co-Owner",
+    name: "FlyingJenn",
+    bio: "FlyingJenn helped found Vengeful Esports in 2026 with a clear mission: assemble elite talent and build a team culture rooted in growth and performance. A proud USAF veteran, she continues to serve while leading with discipline and purpose. Having played Marvel Rivals since Season 0, she enjoys flexing multiple roles and adapting to whatever the team requires.",
+  },
+  {
+    role: "Coach",
+    name: "Ashh",
+    bio: "Ashh is Vengeful's Head Coach, leading the team's competitive development and strategic preparation. Currently studying biomedical sciences, he brings discipline, structure, and analytical thinking to the roster. A former rugby player, he understands high-performance environments and what it takes to compete at the highest level.",
+  },
+  {
+    role: "Assistant Coach",
+    name: "Boomed",
+    bio: "TBD",
+  },
+  {
+    role: "Manager",
+    name: "Lea",
+    bio: "Lea serves as Vengeful's Team Manager and Social Media Director, overseeing operations and shaping the team's digital presence. She is currently studying forensic psychology and brings strong analytical thinking to both strategy and branding. Outside of esports, she enjoys music, dogs, and competitive FPS games.",
+  },
+  {
+    role: "Analyst",
+    name: "Yeby",
+    bio: "Yeby is one of Vengeful's Analysts, focusing on data-driven insights that sharpen strategy and performance. Currently studying Data Science, he thrives on breaking down numbers to find competitive edges. Outside of analytics, he enjoys cooking and gaming.",
+  },
+  {
+    role: "Analyst",
+    name: "Hellfired",
+    bio: "Hellfired has been an analyst for Vengeful since its inception in 2026. He has achieved top 300 in Overwatch as a DPS player. He is also a former Olympian trainee and has won multiple awards and competitions in his sport.",
+  },
+  {
+    role: "TBD",
+    name: "Mr.Vexer",
+    bio: "TBD",
+  },
 ];
 
 export default function AboutPage() {
@@ -46,85 +91,35 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="grid gap-6">
-            <article className="glass-card p-6 space-y-3">
-              <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
-                Owner
-              </p>
-              <h3 className="text-2xl font-semibold">Aapt</h3>
-              <p className="text-gray-300">
-                Aapt set out to build a world-class esports organization, and in February 2026, 
-                that vision became reality with the founding of Vengeful Esports.
-              </p>
-            </article>
-            <article className="glass-card p-6 space-y-3">
-              <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
-                Co-Owner
-              </p>
-              <h3 className="text-2xl font-semibold">FlyingJenn</h3>
-              <p className="text-gray-300">
-                FlyingJenn helped found Vengeful Esports in 2026 with a clear mission: 
-                assemble elite talent and build a team culture rooted in growth and performance. 
-                A proud USAF veteran, she continues to serve while leading with discipline and purpose. 
-                Having played Marvel Rivals since Season 0, she enjoys flexing multiple roles and adapting 
-                to whatever the team requires.
-              </p>
-            </article>
-            <article className="glass-card p-6 space-y-3">
-              <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
-                Coach
-              </p>
-              <h3 className="text-2xl font-semibold">Ashh</h3>
-              <p className="text-gray-300">
-                Ashh is Vengeful’s Head Coach, leading the team’s competitive development and strategic preparation. Currently studying biomedical sciences, he brings discipline, structure, and analytical thinking to the roster. A former rugby player, he understands high-performance environments and what it takes to compete at the highest level.
-              </p>
-            </article>
-            <article className="glass-card p-6 space-y-3">
-              <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
-                Assistant Coach
-              </p>
-              <h3 className="text-2xl font-semibold">Boomed</h3>
-              <p className="text-gray-300">
-                TBD
-              </p>
-            </article>
-                        <article className="glass-card p-6 space-y-3">
-              <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
-                Manager
-              </p>
-              <h3 className="text-2xl font-semibold">Lea</h3>
-              <p className="text-gray-300">
-                Lea serves as Vengeful’s Team Manager and Social Media Director, overseeing operations and shaping the team’s digital presence. She is currently studying forensic psychology and brings strong analytical thinking to both strategy and branding. Outside of esports, she enjoys music, dogs, and competitive FPS games.
-              </p>
-            </article>
-                        <article className="glass-card p-6 space-y-3">
-              <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
-                Analyst
-              </p>
-              <h3 className="text-2xl font-semibold">Yeby</h3>
-              <p className="text-gray-300">
-                Yeby is one of Vengeful’s Analysts, focusing on data-driven insights that sharpen strategy and performance. Currently studying Data Science, he thrives on breaking down numbers to find competitive edges. Outside of analytics, he enjoys cooking and gaming.
-              </p>
-            </article>
-                        <article className="glass-card p-6 space-y-3">
-              <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
-                Analyst
-              </p>
-              <h3 className="text-2xl font-semibold">Hellfired</h3>
-              <p className="text-gray-300">
-                Hellfired has been an analyst for Vengeful since its inception in 2026.
-                He has achieved top 300 in Overwatch as a DPS player.
-                He is also a former Olympian trainee and has won multiple awards and competitions in his sport. 
-              </p>
-            </article>
-                        <article className="glass-card p-6 space-y-3">
-              <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
-                TBD
-              </p>
-              <h3 className="text-2xl font-semibold">Mr.Vexer</h3>
-              <p className="text-gray-300">
-                TBD
-              </p>
-            </article>
+            {staff.map((member) => {
+              const twitchProfile = streams.find(
+                (stream) => stream.name.toLowerCase() === member.name.toLowerCase(),
+              );
+              return (
+                <article key={`${member.role}-${member.name}`} className="glass-card p-6 space-y-3">
+                  <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
+                    {member.role}
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-2xl font-semibold">{member.name}</h3>
+                    {twitchProfile ? (
+                      <a
+                        href={twitchProfile.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-vengefulLight transition hover:text-white"
+                        aria-label={`${member.name} on Twitch`}
+                      >
+                        <TwitchIcon className="h-4 w-4" />
+                      </a>
+                    ) : null}
+                  </div>
+                  <p className="text-gray-300">
+                    {member.bio}
+                  </p>
+                </article>
+              );
+            })}
           </div>
         </section>
 

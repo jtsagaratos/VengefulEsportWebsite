@@ -6,6 +6,8 @@ import { TopNav } from "@/components/TopNav";
 import { merch, news, roster, sponsors, streams } from "@/data/siteContent";
 import { getGameRecaps } from "@/lib/gameRecaps";
 import { getScheduleEvents } from "@/lib/schedule";
+import { fetchLiveStatuses } from "@/lib/twitch";
+import { TwitchIcon } from "@/components/TwitchIcon";
 
 const statHighlights = [
   { label: "Matches Played", value: "80+", detail: "since MR S6" },
@@ -50,11 +52,23 @@ const contentHighlights = [
 ];
 
 export default async function Home() {
-  const [schedule, gameRecaps] = await Promise.all([getScheduleEvents(), getGameRecaps()]);
+  const [schedule, gameRecaps, fetchedStatuses] = await Promise.all([
+    getScheduleEvents(),
+    getGameRecaps(),
+    fetchLiveStatuses(streams.map((stream) => stream.channel.toLowerCase())),
+  ]);
   const nextEvent = schedule[0];
   const upcomingEvents = schedule.slice(0, 2);
   const latestNews = news.slice(0, 2);
   const merchDrops = merch.slice(0, 3);
+  const statusMap = { ...fetchedStatuses };
+  if (process.env.FORCE_COLIN_LIVE === "true") {
+    statusMap.fpscollin = true;
+  }
+  const hydratedStreams = streams.map((stream) => {
+    const channelKey = stream.channel.toLowerCase();
+    return { ...stream, isLive: Boolean(statusMap[channelKey]) };
+  });
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -274,7 +288,7 @@ export default async function Home() {
           </div>
           <div className="grid gap-6 md:grid-cols-2">
             {roster.map((player) => {
-              const playerStream = streams.find(
+              const playerStream = hydratedStreams.find(
                 (stream) => stream.name.toLowerCase() === player.name.toLowerCase(),
               );
               const playerImage = player.image ?? playerStream?.logo ?? "/VNGFLogo_1.png";
@@ -292,7 +306,29 @@ export default async function Home() {
                   </div>
                   <div className="flex-1 space-y-3">
                     <div className="flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
-                      <h3 className="text-2xl font-bold">{player.name}</h3>
+                      <div className="flex items-center gap-3">
+                        <h3 className="text-2xl font-bold">{player.name}</h3>
+                        {playerStream ? (
+                          <Link
+                            href={playerStream.url}
+                            target="_blank"
+                            rel="noreferrer"
+                        className="text-vengefulLight transition hover:text-white"
+                        aria-label={`${player.name} on Twitch`}
+                      >
+                        <TwitchIcon className="h-4 w-4" />
+                      </Link>
+                    ) : null}
+                        {playerStream?.isLive ? (
+                          <span className="flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">
+                            <span
+                              className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse"
+                              aria-label="Live on Twitch"
+                            />
+                            Live
+                          </span>
+                        ) : null}
+                      </div>
                       <span className="text-xs uppercase tracking-[0.4em] text-gray-500">{player.role}</span>
                     </div>
                     <p className="text-gray-300">{player.bio}</p>
