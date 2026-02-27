@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NextEventCountdown } from "@/components/NextEventCountdown";
+import { SubscribeSection } from "@/components/SubscribeSection";
 import { TopNav } from "@/components/TopNav";
 import { merch, news, roster, sponsors, streams } from "@/data/siteContent";
 import { getGameRecaps } from "@/lib/gameRecaps";
@@ -435,26 +436,7 @@ export default async function Home() {
           ))}
         </section>
 
-        <section id="subscribe" className="glass-panel space-y-6 p-10">
-          <div className="flex flex-col gap-2 text-center">
-            <p className="section-eyebrow">Signal briefing</p>
-            <h2 className="text-3xl font-semibold">Monthly digest with match alerts and drops.</h2>
-            <p className="text-sm text-gray-400">Zero spam, just the intel we would want as fans.</p>
-          </div>
-          <form className="mx-auto flex w-full max-w-2xl flex-col gap-4 sm:flex-row">
-            <input
-              type="email"
-              className="w-full rounded-full border border-white/10 bg-black/40 px-6 py-4 text-white placeholder:text-gray-500 focus:border-vengefulLight focus:outline-none"
-              placeholder="you@example.com"
-            />
-            <button
-              type="submit"
-              className="rounded-full bg-vengefulLight px-8 py-4 text-sm font-semibold text-vengefulBlack transition hover:bg-white"
-            >
-              Subscribe
-            </button>
-          </form>
-        </section>
+        <SubscribeSection />
 
         <footer className="glass-panel grid gap-8 px-8 py-10 md:grid-cols-3">
           <div className="space-y-2">

@@ -1,6 +1,6 @@
 import { google, sheets_v4 } from "googleapis";
 
-const sheetsScope = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
+const sheetsScope = ["https://www.googleapis.com/auth/spreadsheets"];
 const excelEpochOffset = 25569; // Excel serial date offset (days from 1899-12-30)
 const msPerDay = 24 * 60 * 60 * 1000;
 
@@ -34,10 +34,14 @@ export type SheetsClient = {
   spreadsheetId: string;
 };
 
-export async function getSheetsClient(): Promise<SheetsClient | null> {
+type SheetsClientOptions = {
+  spreadsheetId?: string;
+};
+
+export async function getSheetsClient(options: SheetsClientOptions = {}): Promise<SheetsClient | null> {
   const clientEmail = process.env.GOOGLE_SHEETS_CLIENT_EMAIL;
   const privateKey = normalizePrivateKey(process.env.GOOGLE_SHEETS_PRIVATE_KEY);
-  const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
+  const spreadsheetId = options.spreadsheetId ?? process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
 
   if (!clientEmail || !privateKey || !spreadsheetId) {
     if (!missingCredentialWarned) {
@@ -51,6 +55,29 @@ export async function getSheetsClient(): Promise<SheetsClient | null> {
   const sheets = google.sheets({ version: "v4", auth });
   return { sheets, spreadsheetId };
 }
+
+export const appendSubscriberEmail = async (email: string, source = "website") => {
+  const spreadsheetId =
+    process.env.GOOGLE_SUBSCRIBERS_SPREADSHEET_ID ?? process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
+  if (!spreadsheetId) {
+    throw new Error("Missing spreadsheet ID for subscribers.");
+  }
+  const sheetsClient = await getSheetsClient({ spreadsheetId });
+  if (!sheetsClient) {
+    throw new Error("Unable to initialize Google Sheets client.");
+  }
+
+  const range = process.env.GOOGLE_SUBSCRIBERS_RANGE ?? "Subscribers!A:C";
+  await sheetsClient.sheets.spreadsheets.values.append({
+    spreadsheetId: sheetsClient.spreadsheetId,
+    range,
+    valueInputOption: "USER_ENTERED",
+    insertDataOption: "INSERT_ROWS",
+    requestBody: {
+      values: [[email.trim(), source, new Date().toISOString()]],
+    },
+  });
+};
 
 export const parseDateValue = (value: string | number | undefined): Date | null => {
   if (typeof value === "number" && Number.isFinite(value)) {
