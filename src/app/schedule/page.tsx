@@ -2,19 +2,16 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { TopNav } from "@/components/TopNav";
 import { NextEventCountdown } from "@/components/NextEventCountdown";
-import { scheduleEvents } from "@/data/siteContent";
+import { getScheduleEvents } from "@/lib/schedule";
 
 export const metadata: Metadata = {
   title: "Schedule | Vengeful Esports",
   description: "Upcoming matches and countdown to our next event.",
 };
 
-const sortedEvents = [...scheduleEvents].sort(
-  (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-);
-const nextEvent = sortedEvents[0];
-
-export default function SchedulePage() {
+export default async function SchedulePage() {
+  const sortedEvents = await getScheduleEvents();
+  const nextEvent = sortedEvents[0];
   return (
     <div className="min-h-screen bg-vengefulBlack/70 text-white">
       <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-10 sm:px-6 lg:px-8">
@@ -64,7 +61,7 @@ export default function SchedulePage() {
           <div className="space-y-4">
             {sortedEvents.map((event) => (
               <article
-                key={event.date}
+                key={`${event.date}-${event.opponent}-${event.stage}`}
                 className="glass-card p-6"
               >
                 <div className="grid gap-6 md:grid-cols-[1fr_auto_1fr] md:items-center">

@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { NextEventCountdown } from "@/components/NextEventCountdown";
 import { TopNav } from "@/components/TopNav";
-import { merch, news, roster, scheduleEvents, sponsors, streams } from "@/data/siteContent";
+import { merch, news, roster, sponsors, streams } from "@/data/siteContent";
+import { getGameRecaps } from "@/lib/gameRecaps";
+import { getScheduleEvents } from "@/lib/schedule";
 
 const statHighlights = [
   { label: "Matches Played", value: "80+", detail: "since MR S6" },
@@ -46,31 +48,10 @@ const contentHighlights = [
   },
 ];
 
-const previousMatches = [
-  {
-    opponent: "ZAYINHELLO",
-    event: "MRC S6 Open Qualifiers",
-    date: "February 14, 2026",
-    result: "Win 3-0",
-  },
- {
-    opponent: "Purge Umbra",
-    event: "MRC S6 Open Qualifiers",
-    date: "February 14, 2026",
-    result: "Win 1-0",
-  },
- {
-    opponent: "ScarletValor",
-    event: "MRC S6 Open Qualifiers",
-    date: "February 14, 2026",
-    result: "Win 1-0",
-  },
-  
-];
-
-export default function Home() {
-  const nextEvent = scheduleEvents[0];
-  const upcomingEvents = scheduleEvents.slice(0, 4);
+export default async function Home() {
+  const [schedule, gameRecaps] = await Promise.all([getScheduleEvents(), getGameRecaps()]);
+  const nextEvent = schedule[0];
+  const upcomingEvents = schedule.slice(0, 4);
   const latestNews = news.slice(0, 2);
   const merchDrops = merch.slice(0, 3);
 
@@ -233,18 +214,22 @@ export default function Home() {
               </p>
             </div>
             <div className="flex-1 space-y-4 overflow-y-auto pr-2">
-              {previousMatches.map((match) => {
+              {gameRecaps.map((match) => {
                 const [outcome, ...scoreParts] = match.result.split(" ");
                 const score = scoreParts.join(" ") || match.result;
                 const outcomeIsWin = (outcome ?? "").toLowerCase() === "win";
+                const matchDate = new Date(match.date);
+                const displayDate = Number.isNaN(matchDate.getTime())
+                  ? match.date
+                  : matchDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
                 return (
                   <div
-                    key={`${match.event}-${match.opponent}`}
+                    key={`${match.event}-${match.opponent}-${match.date}`}
                     className="space-y-3 rounded-2xl border border-white/10 bg-black/40 p-4"
                   >
                     <div className="flex items-center justify-between text-xs text-gray-400">
                       <p className="uppercase tracking-[0.4em] text-vengefulLight">{match.event}</p>
-                      <p>{match.date}</p>
+                      <p>{displayDate}</p>
                     </div>
                     <div className="flex items-center justify-between gap-4">
                       <div className="flex items-center gap-4">
@@ -368,7 +353,6 @@ export default function Home() {
                   <p className="text-base text-white">{formatDate(event.date).dateLabel}</p>
                   <p>{formatDate(event.date).timeLabel}</p>
                 </div>
-                <div className="text-right text-xs uppercase tracking-[0.35em] text-gray-500">{event.location}</div>
               </article>
             ))}
           </div>
