@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import type { StaticImageData } from "next/image";
 import { TopNav } from "@/components/TopNav";
 import { streams } from "@/data/siteContent";
 import { TwitchIcon } from "@/components/TwitchIcon";
@@ -13,7 +15,14 @@ const milestones = [
   { year: "Mid FEB 2026", detail: "VNGFL enters first MRC, placing 2nd in Open Qualifiers" },
 ];
 
-const staff = [
+type StaffMember = {
+  role: string;
+  name: string;
+  bio: string;
+  image?: StaticImageData | string;
+};
+
+const staff: StaffMember[] = [
   {
     role: "Owner",
     name: "Aapt",
@@ -95,28 +104,43 @@ export default function AboutPage() {
               const twitchProfile = streams.find(
                 (stream) => stream.name.toLowerCase() === member.name.toLowerCase(),
               );
+              const staffImage = member.image ?? twitchProfile?.logo ?? "/VNGFLogo_1.png";
               return (
-                <article key={`${member.role}-${member.name}`} className="glass-card p-6 space-y-3">
-                  <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
-                    {member.role}
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <h3 className="text-2xl font-semibold">{member.name}</h3>
-                    {twitchProfile ? (
-                      <a
-                        href={twitchProfile.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-vengefulLight transition hover:text-white"
-                        aria-label={`${member.name} on Twitch`}
-                      >
-                        <TwitchIcon className="h-4 w-4" />
-                      </a>
-                    ) : null}
+                <article
+                  key={`${member.role}-${member.name}`}
+                  className="glass-card flex flex-col gap-5 p-6 sm:flex-row sm:items-center"
+                >
+                  <div className="flex-shrink-0">
+                    <Image
+                      src={staffImage}
+                      alt={`${member.name} portrait`}
+                      width={112}
+                      height={112}
+                      className="h-28 w-28 rounded-3xl border border-white/10 object-cover"
+                    />
                   </div>
-                  <p className="text-gray-300">
-                    {member.bio}
-                  </p>
+                  <div className="flex-1 space-y-3">
+                    <div className="flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
+                      <div className="flex items-center gap-3">
+                        <h3 className="text-2xl font-semibold">{member.name}</h3>
+                        {twitchProfile ? (
+                          <a
+                            href={twitchProfile.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-vengefulLight transition hover:text-white"
+                            aria-label={`${member.name} on Twitch`}
+                          >
+                            <TwitchIcon className="h-4 w-4" />
+                          </a>
+                        ) : null}
+                      </div>
+                      <span className="text-xs uppercase tracking-[0.4em] text-gray-400">
+                        {member.role}
+                      </span>
+                    </div>
+                    <p className="text-gray-300">{member.bio}</p>
+                  </div>
                 </article>
               );
             })}
