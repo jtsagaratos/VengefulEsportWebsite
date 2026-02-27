@@ -137,6 +137,14 @@ export const streams = [
     isLive: false,
     logo: aaptImage,
   },
+    {
+    name: "Hellfired",
+    platform: "Twitch",
+    url: "https://www.twitch.tv/hellfiredd1",
+    channel: "Hellfired",
+    isLive: false,
+    logo: "/VNGFLogo_1.png",
+  },
 ];
 
 export const scheduleEvents = [

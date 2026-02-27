@@ -47,8 +47,7 @@ export default function SchedulePage() {
                   <span>VNGFL</span>
                   <span className="text-xs uppercase tracking-[0.4em] text-gray-500">vs</span>
                   <span className="text-vengefulLight">{nextEvent.opponent}</span>
-                  <div className="ml-auto flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.35em] text-gray-400">
-                    <span>Countdown</span>
+                  <div className="ml-auto flex flex-wrap items-center gap-3 text-vengefulLight">
                     <NextEventCountdown
                       targetDate={nextEvent.date}
                       className="text-lg font-semibold text-white leading-none whitespace-nowrap"

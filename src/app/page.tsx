@@ -354,8 +354,7 @@ export default function Home() {
                     <span>VNGFL</span>
                     <span className="text-xs uppercase tracking-[0.35em] text-gray-500">vs</span>
                     <span className="text-vengefulLight">{event.opponent}</span>
-                    <div className="ml-auto flex flex-wrap items-center gap-3">
-                      <span className="text-xs uppercase tracking-[0.35em] text-gray-400">Countdown</span>
+                    <div className="ml-auto flex flex-wrap items-center gap-3 text-vengefulLight">
                       <div>
                         <NextEventCountdown
                           targetDate={event.date}

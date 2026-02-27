@@ -75,7 +75,7 @@ export default function AboutPage() {
               </p>
               <h3 className="text-2xl font-semibold">Ashh</h3>
               <p className="text-gray-300">
-                TBD
+                Ashh is Vengeful’s Head Coach, leading the team’s competitive development and strategic preparation. Currently studying biomedical sciences, he brings discipline, structure, and analytical thinking to the roster. A former rugby player, he understands high-performance environments and what it takes to compete at the highest level.
               </p>
             </article>
             <article className="glass-card p-6 space-y-3">
@@ -93,7 +93,7 @@ export default function AboutPage() {
               </p>
               <h3 className="text-2xl font-semibold">Lea</h3>
               <p className="text-gray-300">
-                TBD
+                Lea serves as Vengeful’s Team Manager and Social Media Director, overseeing operations and shaping the team’s digital presence. She is currently studying forensic psychology and brings strong analytical thinking to both strategy and branding. Outside of esports, she enjoys music, dogs, and competitive FPS games.
               </p>
             </article>
                         <article className="glass-card p-6 space-y-3">
