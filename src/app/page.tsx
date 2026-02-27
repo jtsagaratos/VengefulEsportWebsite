@@ -51,7 +51,7 @@ const contentHighlights = [
 export default async function Home() {
   const [schedule, gameRecaps] = await Promise.all([getScheduleEvents(), getGameRecaps()]);
   const nextEvent = schedule[0];
-  const upcomingEvents = schedule.slice(0, 4);
+  const upcomingEvents = schedule.slice(0, 2);
   const latestNews = news.slice(0, 2);
   const merchDrops = merch.slice(0, 3);
 
@@ -316,19 +316,22 @@ export default async function Home() {
               <h2 className="text-3xl font-semibold">Lock in the next watch parties.</h2>
             </div>
             <Link href="/schedule" className="text-xs uppercase tracking-[0.35em] text-gray-400 hover:text-vengefulLight">
-              See calendar
+              See Full calendar
             </Link>
           </div>
           <div className="space-y-4">
             {upcomingEvents.map((event) => (
               <article
                 key={`${event.date}-${event.opponent}`}
-                className="glass-panel grid gap-4 p-6 text-sm sm:grid-cols-[1.3fr_auto_auto] sm:items-center"
+                className="glass-card p-6"
               >
-                <div className="space-y-3">
-                  <p className="text-xs uppercase tracking-[0.35em] text-vengefulLight">{event.stage}</p>
-                  <h3 className="text-xl font-semibold text-white">{event.title}</h3>
-                  <div className="flex flex-wrap items-center gap-3 text-base font-semibold text-white">
+                <div className="grid gap-6 md:grid-cols-[1fr_auto_1fr] md:items-center">
+                  <div className="space-y-3">
+                    <p className="section-heading text-gray-400">{event.stage}</p>
+                    <h3 className="text-2xl font-semibold text-white">{event.title}</h3>
+                    <p className="text-gray-300">{event.location}</p>
+                  </div>
+                  <div className="flex items-center justify-center gap-4 text-base font-semibold text-white text-center">
                     <Image
                       src="/VNGFLogo_1.png"
                       alt="Vengeful Esports logo"
@@ -339,19 +342,29 @@ export default async function Home() {
                     <span>VNGFL</span>
                     <span className="text-xs uppercase tracking-[0.35em] text-gray-500">vs</span>
                     <span className="text-vengefulLight">{event.opponent}</span>
-                    <div className="ml-auto flex flex-wrap items-center gap-3 text-vengefulLight">
-                      <div>
-                        <NextEventCountdown
-                          targetDate={event.date}
-                          className="text-base font-semibold text-white leading-none whitespace-nowrap"
-                        />
-                      </div>
-                    </div>
                   </div>
-                </div>
-                <div className="text-center text-gray-400 sm:justify-self-center">
-                  <p className="text-base text-white">{formatDate(event.date).dateLabel}</p>
-                  <p>{formatDate(event.date).timeLabel}</p>
+                  <div className="flex flex-col items-center gap-3 md:items-end">
+                    <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
+                      <p className="text-lg font-semibold text-white">
+                        {new Date(event.date).toLocaleDateString("en-US", {
+                          weekday: "short",
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </p>
+                      <p className="text-sm text-gray-300">
+                        {new Date(event.date).toLocaleTimeString("en-US", {
+                          hour: "numeric",
+                          minute: "2-digit",
+                          timeZoneName: "short",
+                        })}
+                      </p>
+                    </div>
+                    <NextEventCountdown
+                      targetDate={event.date}
+                      className="text-base font-semibold text-white leading-none whitespace-nowrap"
+                    />
+                  </div>
                 </div>
               </article>
             ))}
