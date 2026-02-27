@@ -17,11 +17,11 @@ export function TopNav({ className }: TopNavProps) {
             width={1600}
             height={100}
             priority
-            className="h-auto w-full object-cover"
+            className="block h-auto w-full object-cover"
           />
         </Link>
         <nav
-          className="glass-card mt-4 flex w-full flex-wrap items-center justify-center gap-4 overflow-x-auto rounded-3xl px-4 py-3 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-gray-200 shadow-lg backdrop-blur md:w-[min(90vw,720px)] md:-translate-y-8 md:gap-5 md:px-6 md:text-[0.65rem] lg:-translate-y-10 lg:px-8 lg:text-xs"
+          className="glass-card -mt-4 flex w-full flex-wrap items-center justify-center gap-4 overflow-x-auto rounded-3xl px-4 py-3 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-gray-200 shadow-lg backdrop-blur sm:-mt-5 md:-mt-6 md:w-[min(90vw,720px)] md:gap-5 md:px-6 md:text-[0.65rem] lg:-mt-[11rem] lg:px-8 lg:text-xs"
         >
           {navLinks.map((item) => (
             <Link
