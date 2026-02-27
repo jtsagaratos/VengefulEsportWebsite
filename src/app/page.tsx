@@ -338,12 +338,32 @@ export default function Home() {
             {upcomingEvents.map((event) => (
               <article
                 key={`${event.date}-${event.opponent}`}
-                className="glass-panel grid gap-4 p-6 text-sm sm:grid-cols-[1.2fr_0.8fr_auto] sm:items-center"
+                className="glass-panel grid gap-4 p-6 text-sm sm:grid-cols-[1.3fr_auto_auto] sm:items-center"
               >
-                <div>
+                <div className="space-y-3">
                   <p className="text-xs uppercase tracking-[0.35em] text-vengefulLight">{event.stage}</p>
                   <h3 className="text-xl font-semibold text-white">{event.title}</h3>
-                  <p className="text-gray-400">vs {event.opponent}</p>
+                  <div className="flex flex-wrap items-center gap-3 text-base font-semibold text-white">
+                    <Image
+                      src="/VNGFLogo_1.png"
+                      alt="Vengeful Esports logo"
+                      width={40}
+                      height={40}
+                      className="h-10 w-10 object-contain"
+                    />
+                    <span>VNGFL</span>
+                    <span className="text-xs uppercase tracking-[0.35em] text-gray-500">vs</span>
+                    <span className="text-vengefulLight">{event.opponent}</span>
+                    <div className="ml-auto flex flex-wrap items-center gap-3">
+                      <span className="text-xs uppercase tracking-[0.35em] text-gray-400">Countdown</span>
+                      <div>
+                        <NextEventCountdown
+                          targetDate={event.date}
+                          className="text-base font-semibold text-white leading-none whitespace-nowrap"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="text-center text-gray-400 sm:justify-self-center">
                   <p className="text-base text-white">{formatDate(event.date).dateLabel}</p>

@@ -27,22 +27,41 @@ const getRemaining = (targetMs: number): Countdown => {
 
 type NextEventCountdownProps = {
   targetDate: string;
+  className?: string;
 };
 
-export function NextEventCountdown({ targetDate }: NextEventCountdownProps) {
+export function NextEventCountdown({ targetDate, className }: NextEventCountdownProps) {
   const target = new Date(targetDate).getTime();
   const [remaining, setRemaining] = useState<Countdown>(() => getRemaining(target));
+  const [isClient, setIsClient] = useState(false);
+  const countdownClasses = className ?? "text-xl font-semibold text-white";
 
   useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      setIsClient(true);
+      setRemaining(getRemaining(target));
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [target]);
+
+  useEffect(() => {
+    if (!isClient) {
+      return () => {};
+    }
+
     const interval = setInterval(() => {
       setRemaining(getRemaining(target));
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [target]);
+  }, [target, isClient]);
 
   if (Number.isNaN(target)) {
     return <p className="text-sm text-red-400">Invalid countdown target.</p>;
+  }
+
+  if (!isClient) {
+    return <p className={countdownClasses}>--d : --h : --m : --s</p>;
   }
 
   if (remaining.total <= 0) {
@@ -56,5 +75,5 @@ export function NextEventCountdown({ targetDate }: NextEventCountdownProps) {
     `${String(remaining.seconds).padStart(2, "0")}s`,
   ];
 
-  return <p className="text-xl font-semibold text-white">{parts.join(" : ")}</p>;
+  return <p className={countdownClasses}>{parts.join(" : ")}</p>;
 }

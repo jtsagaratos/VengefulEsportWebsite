@@ -23,7 +23,7 @@ export default function SchedulePage() {
         <section className="glass-panel space-y-6 p-10 text-center">
           <h1 className="text-4xl font-semibold">Upcoming Matches</h1>
           {nextEvent && (
-            <div className="flex flex-col gap-4 text-sm text-gray-300 md:flex-row md:items-center md:justify-center md:gap-10">
+            <div className="flex flex-col gap-4 text-sm text-gray-300 md:items-center md:justify-center">
               <div className="space-y-3 text-left">
                 <div>
                   Next up: <span className="text-white">{nextEvent.title}</span> on{" "}
@@ -36,20 +36,26 @@ export default function SchedulePage() {
                   })}{" "}
                   ({nextEvent.location})
                 </div>
-                  <div className="flex items-center gap-4 text-lg font-semibold text-white">
-                    <Image
-                      src="/VNGFLogo_1.png"
-                      alt="Vengeful Esports logo"
-                      width={48}
-                      height={48}
-                      className="h-12 w-12 object-contain"
-                    />
-                    <span>VNGFL</span>
+                <div className="flex flex-wrap items-center gap-4 text-lg font-semibold text-white">
+                  <Image
+                    src="/VNGFLogo_1.png"
+                    alt="Vengeful Esports logo"
+                    width={48}
+                    height={48}
+                    className="h-12 w-12 object-contain"
+                  />
+                  <span>VNGFL</span>
                   <span className="text-xs uppercase tracking-[0.4em] text-gray-500">vs</span>
                   <span className="text-vengefulLight">{nextEvent.opponent}</span>
+                  <div className="ml-auto flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.35em] text-gray-400">
+                    <span>Countdown</span>
+                    <NextEventCountdown
+                      targetDate={nextEvent.date}
+                      className="text-lg font-semibold text-white leading-none whitespace-nowrap"
+                    />
+                  </div>
                 </div>
               </div>
-              <NextEventCountdown targetDate={nextEvent.date} />
             </div>
           )}
         </section>
