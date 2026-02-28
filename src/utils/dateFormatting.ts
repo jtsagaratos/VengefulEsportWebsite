@@ -13,7 +13,14 @@ export const DEFAULT_TIME_OPTIONS: Intl.DateTimeFormatOptions = {
   minute: "2-digit",
 };
 
+const DEFAULT_EVENT_TIME_ZONE = process.env.NEXT_PUBLIC_EVENT_TIMEZONE ?? "America/New_York";
+
 const invalidLabels: DateLabels = { dateLabel: "TBD", timeLabel: "" };
+
+const withEventTimeZone = (options?: Intl.DateTimeFormatOptions) => ({
+  ...(options ?? {}),
+  timeZone: options?.timeZone ?? DEFAULT_EVENT_TIME_ZONE,
+});
 
 export const formatDateParts = (
   dateString: string,
@@ -27,8 +34,8 @@ export const formatDateParts = (
   }
 
   try {
-    const dateFormatter = new Intl.DateTimeFormat(locale, dateOptions);
-    const timeFormatter = new Intl.DateTimeFormat(locale, timeOptions);
+    const dateFormatter = new Intl.DateTimeFormat(locale, withEventTimeZone(dateOptions));
+    const timeFormatter = new Intl.DateTimeFormat(locale, withEventTimeZone(timeOptions));
     return {
       dateLabel: dateFormatter.format(date),
       timeLabel: timeFormatter.format(date),
