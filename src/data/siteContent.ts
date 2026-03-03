@@ -1,8 +1,14 @@
-import colinImage from "../../images/logos/colin_image.png";
-import WizardImage from "../../images/logos/wiz_image.jpg";
+import colinImage from "../../images/logos/colin_logo.jpg";
+import WizardImage from "../../images/logos/wiz_logo.jpg";
+import wadaImage from "../../images/logos/wada_logo.jpg";
+import leaderImage from "../../images/logos/leader_logo.jpg";
+import deathImage from "../../images/logos/death_logo.jpg";
+import affeckImage from "../../images/logos/affekting_logo.jpg";
+import steadyImage from "../../images/logos/steady_logo.jpg";
+import magiImage from "../../images/logos/magi_logo.jpg";
 import FJImage from "../../images/logos/Flying_Jenn.png";
 import aaptImage from "../../images/logos/aapt_image.png";
-import affeckImage from "../../images/logos/affeck_image.png";
+
 
 export const navLinks = [
   { label: "Home", href: "/" },
@@ -35,7 +41,7 @@ export const roster = [
     role: "Duelist",
     bio: "Steadfast Pressure",
     badges: ["Ruthless", "Surgical"],
-    image: "/VNGFLogo_1.png",
+    image: wadaImage,
     achievements: ["Won the Jay3 Community Clash Tournament", "Peaked rank 1 on leaderboard in season 4.5"],
   },
   {
@@ -43,7 +49,7 @@ export const roster = [
     role: "Duelist",
     bio: "Calculated Aggression",
     badges: ["Aggressive", "Lethal"],
-    image: "/VNGFLogo_1.png",
+    image: leaderImage,
     achievements: ["Reached top 20 in Hela Phoenix, and Psylocke", "Reached MRC top 16 in season 3"],
   },
     {
@@ -51,7 +57,7 @@ export const roster = [
     role: "Duelist (sub)",
     bio: "Sharp Execution",
     badges: ["Unstoppable", "Impactful"],
-    image: "/VNGFLogo_1.png",
+    image: steadyImage,
     achievements: ["TBD"],
   },
   {
@@ -67,7 +73,7 @@ export const roster = [
     role: "Strategist",
     bio: "Tempo Control",
     badges: ["Composed", "Consistent"],
-    image: "/VNGFLogo_1.png",
+    image: deathImage,
     achievements: ["Peaked Rank 1 with multiple Strategist", "Has reached MRC top 8 and top 3"],
   },
     {
@@ -75,7 +81,7 @@ export const roster = [
     role: "Strategist (sub)",
     bio: "Defensive Mastery",
     badges: ["Poised", "Visionary"],
-    image: "/VNGFLogo_1.png",
+    image: magiImage,
     achievements: ["Placed MRC top 65", "Peaked 15th on Marvels Rivals Leaderboard"],
   },
 ];
