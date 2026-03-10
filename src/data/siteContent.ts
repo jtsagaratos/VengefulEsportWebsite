@@ -97,7 +97,38 @@ export const news = [
   {
     title: "Vengeful finishes MRC Open Qualifiers 2nd place!",
     date: "February  14, 2026",
-    summary: "Vengeful Esports made its MRC debut in dominant fashion. The team stormed through the Open Qualifiers with a perfect 10–0 record, securing their place in the double-elimination stage without dropping a single match. Their next challenge awaits on February 28th, where they’ll face C.M.B in what promises to be a high-stakes showdown.",
+    summary: "Vengeful Esports made its MRC debut in dominant fashion. The team stormed through the Open Qualifiers with a perfect 10â€“0 record, securing their place in the double-elimination stage without dropping a single match. Their next challenge awaits on February 28th, where theyâ€™ll face C.M.B in what promises to be a high-stakes showdown.",
+  },
+];
+
+export const instagramFallbackPosts = [
+  {
+    id: "vngf-fallback-1",
+    caption: "Scrim nights hit differently when the whole roster locks in.",
+    permalink: "https://www.instagram.com/p/C7VNGF001/",
+    mediaUrl: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80",
+    timestamp: "2026-02-24T18:00:00Z",
+  },
+  {
+    id: "vngf-fallback-2",
+    caption: "Coach Affekting leading the tactical whiteboard before qualifiers.",
+    permalink: "https://www.instagram.com/p/C7VNGF002/",
+    mediaUrl: "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=1600&q=80",
+    timestamp: "2026-02-20T03:30:00Z",
+  },
+  {
+    id: "vngf-fallback-3",
+    caption: "Content drop day—behind-the-scenes from our latest bootcamp.",
+    permalink: "https://www.instagram.com/p/C7VNGF003/",
+    mediaUrl: "https://images.unsplash.com/photo-1525182008055-f88b95ff7980?auto=format&fit=crop&w=1600&q=80",
+    timestamp: "2026-02-16T19:15:00Z",
+  },
+  {
+    id: "vngf-fallback-4",
+    caption: "Matchday fits ready. Which jersey are you rocking?",
+    permalink: "https://www.instagram.com/p/C7VNGF004/",
+    mediaUrl: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1600&q=80",
+    timestamp: "2026-02-10T17:45:00Z",
   },
 ];
 

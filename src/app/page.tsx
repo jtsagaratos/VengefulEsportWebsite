@@ -2,9 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { NextEventCountdown } from "@/components/NextEventCountdown";
 import { SubscribeSection } from "@/components/SubscribeSection";
+import { InstagramCarousel } from "@/components/InstagramCarousel";
 import { TopNav } from "@/components/TopNav";
-import { merch, news, roster, sponsors, streams } from "@/data/siteContent";
+import { merch, roster, sponsors, streams } from "@/data/siteContent";
 import { getGameRecaps } from "@/lib/gameRecaps";
+import { getInstagramPosts } from "@/lib/instagram";
 import { getScheduleEvents } from "@/lib/schedule";
 import { fetchLiveStatuses } from "@/lib/twitch";
 import { TwitchIcon } from "@/components/TwitchIcon";
@@ -66,16 +68,25 @@ const getEventDateParts = (
     timeOptions ?? { hour: "numeric", minute: "2-digit", timeZoneName: "short" },
   );
 
+const formatInstagramDate = (value: string) => {
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) {
+    return "";
+  }
+  return parsed.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+};
+
 export default async function Home() {
-  const [schedule, gameRecaps, fetchedStatuses] = await Promise.all([
+  const [schedule, gameRecaps, fetchedStatuses, instagramPosts] = await Promise.all([
     getScheduleEvents(),
     getGameRecaps(),
     fetchLiveStatuses(streams.map((stream) => stream.channel.toLowerCase())),
+    getInstagramPosts(6),
   ]);
   const nextEvent = schedule[0];
   const upcomingEvents = schedule.slice(0, 2);
-  const latestNews = news.slice(0, 2);
   const merchDrops = merch.slice(0, 3);
+  const instagramSecondaryPosts = instagramPosts.slice(1, 4);
   const statusMap = { ...fetchedStatuses };
   if (process.env.FORCE_COLIN_LIVE === "true") {
     statusMap.fpscollin = true;
@@ -416,27 +427,68 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="news" className="space-y-6">
+        <section id="instagram" className="space-y-6">
           <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
             <div>
-              <p className="section-eyebrow">Latest news</p>
-              <h2 className="text-3xl font-semibold">Stories from the road.</h2>
+              <p className="section-eyebrow">Instagram</p>
+              <h2 className="text-3xl font-semibold">See the grind between matches.</h2>
             </div>
-            <Link href="/news" className="text-xs uppercase tracking-[0.35em] text-gray-400 hover:text-vengefulLight">
-              Browse all
+            <Link
+              href="https://www.instagram.com/vngfesports/"
+              target="_blank"
+              rel="noreferrer"
+              className="text-xs uppercase tracking-[0.35em] text-gray-400 transition hover:text-vengefulLight"
+            >
+              Open Instagram
             </Link>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
-            {latestNews.map((item) => (
-              <article key={item.title} className="glass-card flex flex-col gap-4 p-6">
-                <p className="text-xs uppercase tracking-[0.35em] text-vengefulLight">{item.date}</p>
-                <h3 className="text-2xl font-semibold text-white">{item.title}</h3>
-                <p className="text-gray-300">{item.summary}</p>
-                <Link href="/news" className="text-sm font-semibold text-vengefulLight hover:text-white">
-                  Read more {"->"}
-                </Link>
-              </article>
-            ))}
+          <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+            <InstagramCarousel posts={instagramPosts} />
+            <div className="space-y-4">
+              {instagramSecondaryPosts.length ? (
+                instagramSecondaryPosts.map((post) => {
+                  const displayDate = formatInstagramDate(post.timestamp);
+                  return (
+                    <Link
+                      key={`${post.id}-${post.timestamp}`}
+                      href={post.permalink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="glass-card flex items-center gap-4 rounded-3xl p-4 transition hover:border-white/30"
+                    >
+                      <div className="relative h-20 w-20 overflow-hidden rounded-2xl bg-white/5">
+                        {post.mediaUrl ? (
+                          <Image
+                            src={post.mediaUrl}
+                            alt={post.caption || "Instagram post thumbnail"}
+                            fill
+                            sizes="80px"
+                            className="object-cover"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 bg-gradient-to-br from-vengefulDark to-black" />
+                        )}
+                      </div>
+                      <div className="flex-1 space-y-1 text-left">
+                        {displayDate ? (
+                          <p className="text-xs uppercase tracking-[0.35em] text-gray-500">{displayDate}</p>
+                        ) : null}
+                        <p className="text-base font-semibold text-white leading-snug">
+                          {post.caption || "Tap to view on Instagram"}
+                        </p>
+                      </div>
+                      <span className="text-xs font-semibold uppercase tracking-[0.35em] text-vengefulLight">
+                        View
+                      </span>
+                    </Link>
+                  );
+                })
+              ) : (
+                <div className="glass-card p-6 text-sm text-gray-400">
+                  New posts will land here once we publish them—check the carousel for the latest highlights.
+                </div>
+              )}
+            </div>
           </div>
         </section>
 
