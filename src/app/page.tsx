@@ -10,6 +10,8 @@ import { fetchLiveStatuses } from "@/lib/twitch";
 import { TwitchIcon } from "@/components/TwitchIcon";
 import { formatDateParts } from "@/utils/dateFormatting";
 
+export const dynamic = "force-dynamic";
+
 const statHighlights = [
   { label: "Matches Played", value: "80+", detail: "since MR S6" },
   { label: "Win rate", value: "80%", detail: "last 12 months" },
@@ -505,3 +507,5 @@ export default async function Home() {
     </div>
   );
 }
+
+

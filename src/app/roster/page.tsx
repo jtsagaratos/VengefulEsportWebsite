@@ -44,13 +44,16 @@ export default async function RosterPage() {
               return (
                 <article key={player.name} className="glass-card flex flex-col gap-5 p-6 sm:flex-row sm:items-center">
                   <div className="flex-shrink-0">
-                    <Image
-                      src={playerImage}
-                      alt={`${player.name} avatar`}
-                      width={112}
-                      height={112}
-                      className="h-28 w-28 rounded-3xl border border-white/10 object-cover"
-                    />
+                    <div className="h-28 w-28 overflow-hidden rounded-3xl border border-white/10">
+                      <Image
+                        src={playerImage}
+                        alt={`${player.name} avatar`}
+                        width={112}
+                        height={112}
+                        className="h-full w-full object-cover transition-transform duration-500"
+                        style={player.imageZoom ? { transform: `scale(${player.imageZoom})` } : undefined}
+                      />
+                    </div>
                   </div>
                   <div className="flex-1 space-y-4">
                     <div className="flex flex-col gap-1 md:flex-row md:items-center md:justify-between">

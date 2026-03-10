@@ -17,6 +17,8 @@ const getEventDateParts = (
     timeOptions ?? { hour: "numeric", minute: "2-digit", timeZoneName: "short" },
   );
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Schedule | Vengeful Esports",
   description: "Upcoming matches and countdown to our next event.",
@@ -122,3 +124,5 @@ export default async function SchedulePage() {
     </div>
   );
 }
+
+

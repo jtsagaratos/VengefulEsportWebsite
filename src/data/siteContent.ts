@@ -42,6 +42,7 @@ export const roster = [
     bio: "Steadfast Pressure",
     badges: ["Ruthless", "Surgical"],
     image: wadaImage,
+    imageZoom: 1.2,
     achievements: ["Won the Jay3 Community Clash Tournament", "Peaked rank 1 on leaderboard in season 4.5"],
   },
   {
