@@ -5,6 +5,7 @@ export type InstagramPost = {
   caption: string;
   permalink: string;
   mediaUrl: string;
+  mediaType: string;
   timestamp: string;
 };
 
@@ -37,6 +38,7 @@ const normalizeTimestamp = (value?: string) => {
 const formatFallback = () =>
   instagramFallbackPosts.map((post) => ({
     ...post,
+    mediaType: "IMAGE",
     timestamp: normalizeTimestamp(post.timestamp),
   }));
 
@@ -61,11 +63,9 @@ async function fetchInstagramFeed(limit: number): Promise<InstagramPost[]> {
     const payload = (await response.json()) as InstagramApiResponse;
     return (payload.data ?? [])
       .map((node) => {
-        const mediaUrl = node.media_url ?? node.thumbnail_url ?? "";
+        const mediaUrl =
+          node.media_type === "VIDEO" ? node.thumbnail_url ?? "" : node.media_url ?? node.thumbnail_url ?? "";
         if (!mediaUrl || !node.permalink) {
-          return null;
-        }
-        if (node.media_type === "VIDEO" && !node.thumbnail_url) {
           return null;
         }
         return {
@@ -73,6 +73,7 @@ async function fetchInstagramFeed(limit: number): Promise<InstagramPost[]> {
           caption: node.caption ?? "",
           permalink: node.permalink,
           mediaUrl,
+          mediaType: node.media_type ?? "IMAGE",
           timestamp: normalizeTimestamp(node.timestamp),
         } satisfies InstagramPost;
       })
