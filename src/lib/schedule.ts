@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { scheduleEvents as fallbackSchedule } from "@/data/siteContent";
 import { getSheetsClient, parseDateValue } from "@/lib/googleSheets";
 
@@ -59,16 +60,23 @@ async function fetchScheduleFromGoogle(): Promise<ScheduleEvent[]> {
 const sortEvents = (events: ScheduleEvent[]) =>
   [...events].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-export const getScheduleEvents = async () => {
+const filterUpcomingEvents = (events: ScheduleEvent[]) => {
+  const now = Date.now();
+  return events.filter((event) => new Date(event.date).getTime() >= now);
+};
+
+export const getScheduleEvents = cache(async () => {
   const sheetEvents = await fetchScheduleFromGoogle();
   if (sheetEvents.length) {
-    return sortEvents(sheetEvents);
+    const sortedSheetEvents = sortEvents(sheetEvents);
+    return filterUpcomingEvents(sortedSheetEvents);
   }
-  return sortEvents(
+  const fallbackEvents = sortEvents(
     fallbackSchedule.map((event) => ({
       ...event,
       date: new Date(event.date).toISOString(),
     })),
   );
-};
+  return filterUpcomingEvents(fallbackEvents);
+});
 

@@ -207,7 +207,12 @@ export default async function Home() {
                 </Link>
               </>
             ) : (
-              <p className="text-gray-400">Stay tuned - new matches drop soon.</p>
+              <div className="flex flex-1 flex-col justify-center gap-4 rounded-2xl border border-dashed border-white/10 bg-black/30 p-6 text-center">
+                <p className="text-xl font-semibold text-white">No match scheduled</p>
+                <p className="text-gray-400">
+                  We&apos;re between tournament dates right now. Check back soon or follow for updates.
+                </p>
+              </div>
             )}
           </div>
         </section>
@@ -381,49 +386,55 @@ export default async function Home() {
             </Link>
           </div>
           <div className="space-y-4">
-            {upcomingEvents.map((event) => {
-              const eventDateParts = getEventDateParts(
-                event.date,
-                { weekday: "short", month: "short", day: "numeric" },
-                { hour: "numeric", minute: "2-digit", timeZoneName: "short" },
-              );
-              return (
-                <article
-                  key={`${event.date}-${event.opponent}`}
-                  className="glass-card p-6"
-                >
-                  <div className="grid gap-6 md:grid-cols-[1fr_auto_1fr] md:items-center">
-                    <div className="space-y-3">
-                      <p className="section-heading text-gray-400">{event.stage}</p>
-                      <h3 className="text-2xl font-semibold text-white">{event.title}</h3>
-                      <p className="text-gray-300">{event.location}</p>
-                    </div>
-                    <div className="flex items-center justify-center gap-4 text-base font-semibold text-white text-center">
-                      <Image
-                        src="/VNGFLogo_1.png"
-                        alt="Vengeful Esports logo"
-                        width={40}
-                        height={40}
-                        className="h-10 w-10 object-contain"
-                      />
-                      <span>VNGFL</span>
-                      <span className="text-xs uppercase tracking-[0.35em] text-gray-500">vs</span>
-                      <span className="text-vengefulLight">{event.opponent}</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-3 md:items-end">
-                      <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
-                        <p className="text-lg font-semibold text-white">{eventDateParts.dateLabel}</p>
-                        <p className="text-sm text-gray-300">{eventDateParts.timeLabel}</p>
+            {upcomingEvents.length ? (
+              upcomingEvents.map((event) => {
+                const eventDateParts = getEventDateParts(
+                  event.date,
+                  { weekday: "short", month: "short", day: "numeric" },
+                  { hour: "numeric", minute: "2-digit", timeZoneName: "short" },
+                );
+                return (
+                  <article
+                    key={`${event.date}-${event.opponent}`}
+                    className="glass-card p-6"
+                  >
+                    <div className="grid gap-6 md:grid-cols-[1fr_auto_1fr] md:items-center">
+                      <div className="space-y-3">
+                        <p className="section-heading text-gray-400">{event.stage}</p>
+                        <h3 className="text-2xl font-semibold text-white">{event.title}</h3>
+                        <p className="text-gray-300">{event.location}</p>
                       </div>
-                      <NextEventCountdown
-                        targetDate={event.date}
-                        className="text-base font-semibold text-white leading-none whitespace-nowrap"
-                      />
+                      <div className="flex items-center justify-center gap-4 text-base font-semibold text-white text-center">
+                        <Image
+                          src="/VNGFLogo_1.png"
+                          alt="Vengeful Esports logo"
+                          width={40}
+                          height={40}
+                          className="h-10 w-10 object-contain"
+                        />
+                        <span>VNGFL</span>
+                        <span className="text-xs uppercase tracking-[0.35em] text-gray-500">vs</span>
+                        <span className="text-vengefulLight">{event.opponent}</span>
+                      </div>
+                      <div className="flex flex-col items-center gap-3 md:items-end">
+                        <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
+                          <p className="text-lg font-semibold text-white">{eventDateParts.dateLabel}</p>
+                          <p className="text-sm text-gray-300">{eventDateParts.timeLabel}</p>
+                        </div>
+                        <NextEventCountdown
+                          targetDate={event.date}
+                          className="text-base font-semibold text-white leading-none whitespace-nowrap"
+                        />
+                      </div>
                     </div>
-                  </div>
-                </article>
-              );
-            })}
+                  </article>
+                );
+              })
+            ) : (
+              <div className="glass-card p-6 text-center text-gray-400">
+                We&apos;re between tournament dates right now. Check back soon or follow for updates.
+              </div>
+            )}
           </div>
         </section>
 

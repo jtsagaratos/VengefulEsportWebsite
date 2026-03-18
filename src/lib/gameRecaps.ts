@@ -1,7 +1,7 @@
 import { cache } from "react";
 import { getSheetsClient, parseDateValue } from "@/lib/googleSheets";
 
-type GameRecap = {
+export type GameRecap = {
   opponent: string;
   event: string;
   date: string;
@@ -74,15 +74,17 @@ async function fetchRecapsFromGoogle(): Promise<GameRecap[]> {
   }
 }
 
-const sortRecaps = (recaps: GameRecap[]) =>
-  [...recaps].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  );
+const sortRecaps = (recaps: GameRecap[]) => [...recaps].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-export const getGameRecaps = cache(async () => {
+export const getAllGameRecaps = cache(async () => {
   const recaps = await fetchRecapsFromGoogle();
   if (recaps.length) {
-    return sortRecaps(recaps).slice(0, 3);
+    return sortRecaps(recaps);
   }
-  return sortRecaps(fallbackRecaps).slice(0, 3);
+  return sortRecaps(fallbackRecaps);
+});
+
+export const getGameRecaps = cache(async () => {
+  const recaps = await getAllGameRecaps();
+  return recaps.slice(0, 3);
 });
