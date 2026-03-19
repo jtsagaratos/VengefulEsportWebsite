@@ -1,11 +1,10 @@
 import colinImage from "../../images/logos/colin_logo.jpg";
 import WizardImage from "../../images/logos/wiz_logo.jpg";
 import wadaImage from "../../images/logos/wada_logo.jpg";
-import leaderImage from "../../images/logos/leader_logo.jpg";
+import blankLogo from "../../images/logos/blank_logo.jpg";
 import deathImage from "../../images/logos/death_logo.jpg";
 import affeckImage from "../../images/logos/affekting_logo.jpg";
 import steadyImage from "../../images/logos/steady_logo.jpg";
-import magiImage from "../../images/logos/magi_logo.jpg";
 import FJImage from "../../images/logos/Flying_Jenn.png";
 import aaptImage from "../../images/logos/aapt_image.png";
 import icelineHostingImage from "../../images/logos/icelinehosting_cover.jpg";
@@ -46,20 +45,20 @@ export const roster = [
     achievements: ["Won the Jay3 Community Clash Tournament", "Peaked rank 1 on leaderboard in season 4.5"],
   },
   {
-    name: "Leader",
+    name: "Reallysticky99",
     role: "Duelist",
-    bio: "Calculated Aggression",
-    badges: ["Aggressive", "Lethal"],
-    image: leaderImage,
-    achievements: ["Reached top 20 in Hela Phoenix, and Psylocke", "Reached MRC top 16 in season 3"],
+    bio: "Backline Hunter",
+    badges: ["Clinical", "Deadly"],
+    image: blankLogo,
+    achievements: ["Achieved Rank 1 OAA 3 times", "Reached MRC top 3 in season 6"],
   },
-    {
-    name: "SteadyFPS",
-    role: "Duelist (sub)",
-    bio: "Sharp Execution",
-    badges: ["Unstoppable", "Impactful"],
-    image: steadyImage,
-    achievements: ["TBD"],
+  {
+    name: "Treeiwnl",
+    role: "Duelist",
+    bio: "Momentum Shifter",
+    badges: ["Explosive", "Aggressive"],
+    image: blankLogo,
+    achievements: ["Maintained OAA for multiple seasons", "Reached MRC top 3 in season 6"],
   },
   {
     name: "Affekting",
@@ -77,13 +76,13 @@ export const roster = [
     image: deathImage,
     achievements: ["Peaked Rank 1 with multiple Strategist", "Has reached MRC top 8 and top 3"],
   },
-    {
-    name: "Magidolaon",
+  {
+    name: "Kingphan",
     role: "Strategist (sub)",
-    bio: "Defensive Mastery",
-    badges: ["Poised", "Visionary"],
-    image: magiImage,
-    achievements: ["Placed MRC top 65", "Peaked 15th on Marvels Rivals Leaderboard"],
+    bio: "Momentum Support",
+    badges: ["Resilient", "Adaptive"],
+    image: blankLogo,
+    achievements: ["Won MRC Season 2", "Has won over 1k in winnings"],
   },
 ];
 
@@ -159,6 +158,30 @@ export const streams = [
     channel: "wizarddread_",
     isLive: false,
     logo: WizardImage,
+  },
+  {
+    name: "Treeiwnl",
+    platform: "Twitch",
+    url: "https://www.twitch.tv/treeiwnl",
+    channel: "Treeiwnl",
+    isLive: false,
+    logo: "/VNGFLogo_1.png",
+  },
+  {
+    name: "Reallysticky99",
+    platform: "Twitch",
+    url: "https://www.twitch.tv/reallysticky999",
+    channel: "Reallysticky99",
+    isLive: false,
+    logo: "/VNGFLogo_1.png",
+  },
+    {
+    name: "Kingphan",
+    platform: "Twitch",
+    url: "https://www.twitch.tv/kingxphan",
+    channel: "kingxphan",
+    isLive: false,
+    logo: "/VNGFLogo_1.png",
   },
   {
     name: "FlyingJenn",
