@@ -8,6 +8,7 @@ import steadyImage from "../../images/logos/steady_logo.jpg";
 import magiImage from "../../images/logos/magi_logo.jpg";
 import FJImage from "../../images/logos/Flying_Jenn.png";
 import aaptImage from "../../images/logos/aapt_image.png";
+import icelineHostingImage from "../../images/logos/icelinehosting_cover.jpg";
 
 
 export const navLinks = [
@@ -16,7 +17,6 @@ export const navLinks = [
   { label: "Schedule", href: "/schedule" },
   { label: "Roster", href: "/roster" },
   { label: "Merch", href: "/merch" },
-  { label: "News", href: "/news" },
 ];
 
 export const roster = [
@@ -93,14 +93,6 @@ export const merch = [
   { label: "Icon Cap", price: "$39", status: "Coming soon" },
 ];
 
-export const news = [
-  {
-    title: "Vengeful finishes MRC Open Qualifiers 2nd place!",
-    date: "February  14, 2026",
-    summary: "Vengeful Esports made its MRC debut in dominant fashion. The team stormed through the Open Qualifiers with a perfect 10â€“0 record, securing their place in the double-elimination stage without dropping a single match. Their next challenge awaits on February 28th, where theyâ€™ll face C.M.B in what promises to be a high-stakes showdown.",
-  },
-];
-
 export const instagramFallbackPosts = [
   {
     id: "vngf-fallback-1",
@@ -132,7 +124,15 @@ export const instagramFallbackPosts = [
   },
 ];
 
-export const sponsors = ["Email us for sponsorship information!", "Your logo could be here!"];
+export const sponsors = [
+  {
+    name: "Iceline Hosting",
+    logo: icelineHostingImage,
+  },
+  {
+    name: "Your logo could be here!",
+  },
+];
 
 export const streams = [
   {

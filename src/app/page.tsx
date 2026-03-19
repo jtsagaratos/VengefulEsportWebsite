@@ -5,7 +5,6 @@ import { SubscribeSection } from "@/components/SubscribeSection";
 import { InstagramCarousel } from "@/components/InstagramCarousel";
 import { TopNav } from "@/components/TopNav";
 import { merch, roster, sponsors, streams } from "@/data/siteContent";
-import { getGameRecaps } from "@/lib/gameRecaps";
 import { getInstagramPosts } from "@/lib/instagram";
 import { getScheduleEvents } from "@/lib/schedule";
 import { fetchLiveStatuses } from "@/lib/twitch";
@@ -35,27 +34,6 @@ const culturePillars = [
   },
 ];
 
-const contentHighlights = [
-  {
-    title: "Watch Us Live",
-    copy: "We do play almost daily, tune in and watch us live!",
-    action: "Watch Live",
-    href: "/watch",
-  },
-  {
-    title: "Behind the keyboards",
-    copy: "Instagram reels from events, bootcamps, and fan meetups.",
-    action: "Follow IG",
-    href: "https://www.instagram.com/vngfesports/",
-  },
-  {
-    title: "Tactical briefing",
-    copy: "Weekly newsletter with opponent scouting reports and drops.",
-    action: "Join List",
-    href: "#subscribe",
-  },
-];
-
 const getEventDateParts = (
   dateString: string,
   dateOptions?: Intl.DateTimeFormatOptions,
@@ -77,9 +55,8 @@ const formatInstagramDate = (value: string) => {
 };
 
 export default async function Home() {
-  const [schedule, gameRecaps, fetchedStatuses, instagramPosts] = await Promise.all([
+  const [schedule, fetchedStatuses, instagramPosts] = await Promise.all([
     getScheduleEvents(),
-    getGameRecaps(),
     fetchLiveStatuses(streams.map((stream) => stream.channel.toLowerCase())),
     getInstagramPosts(6),
   ]);
@@ -224,15 +201,28 @@ export default async function Home() {
           </div>
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-6">
             {sponsors.map((brand) => (
-              <div key={brand} className="rounded-2xl border border-white/5 bg-black/30 px-4 py-3 text-xs uppercase tracking-[0.35em] text-gray-300">
-                {brand}
+              <div
+                key={brand.name}
+                className={`flex h-[108px] items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-black/30 text-center text-xs uppercase tracking-[0.35em] text-gray-300 ${
+                  brand.logo ? "col-span-2 p-2 sm:col-span-2 md:col-span-2" : "px-4 py-3"
+                }`}
+              >
+                {brand.logo ? (
+                  <Image
+                    src={brand.logo}
+                    alt={`${brand.name} logo`}
+                    className="h-full w-full rounded-xl object-cover"
+                  />
+                ) : (
+                  brand.name
+                )}
               </div>
             ))}
           </div>
         </section>
 
-        <section id="about" className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
-          <div className="glass-panel space-y-6 bg-gradient-to-br from-vengefulDark/80 via-black to-black p-10 lg:h-[540px]">
+        <section id="about">
+          <div className="glass-panel space-y-6 bg-gradient-to-br from-vengefulDark/80 via-black to-black p-10">
             <p className="section-eyebrow">Inside the program</p>
             <h2 className="text-3xl font-semibold">Where Strength Becomes Dominance.</h2>
             <p className="text-gray-300">
@@ -247,60 +237,6 @@ export default async function Home() {
                   <p className="mt-2 text-sm text-gray-400">{pillar.copy}</p>
                 </div>
               ))}
-            </div>
-          </div>
-          <div className="glass-card flex h-full flex-col gap-6 p-8 lg:h-[540px]">
-            <div>
-              <p className="section-eyebrow">Game Recaps</p>
-              <p className="text-2xl font-semibold text-white">Witness Greatness</p>
-              <p className="mt-2 text-sm text-gray-400">
-                Scroll through the latest series to see how the roster is trending.
-              </p>
-            </div>
-            <div className="flex-1 space-y-4 overflow-y-auto pr-2">
-              {gameRecaps.map((match) => {
-                const [outcome, ...scoreParts] = match.result.split(" ");
-                const score = scoreParts.join(" ") || match.result;
-                const outcomeIsWin = (outcome ?? "").toLowerCase() === "win";
-                const matchDate = new Date(match.date);
-                const displayDate = Number.isNaN(matchDate.getTime())
-                  ? match.date
-                  : matchDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-                return (
-                  <div
-                    key={`${match.event}-${match.opponent}-${match.date}`}
-                    className="space-y-3 rounded-2xl border border-white/10 bg-black/40 p-4"
-                  >
-                    <div className="flex items-center justify-between text-xs text-gray-400">
-                      <p className="uppercase tracking-[0.4em] text-vengefulLight">{match.event}</p>
-                      <p>{displayDate}</p>
-                    </div>
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="flex items-center gap-4">
-                        <Image
-                          src="/VNGFLogo_1.png"
-                          alt="Vengeful Esports logo"
-                          width={36}
-                          height={36}
-                          className="h-9 w-9 object-contain"
-                        />
-                        <span className="text-xs font-semibold uppercase tracking-[0.5em] text-gray-500">vs</span>
-                        <p className="text-lg font-semibold text-white">{match.opponent}</p>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span
-                          className={`rounded-full px-2 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.3em] ${
-                            outcomeIsWin ? "bg-emerald-400/15 text-emerald-300" : "bg-rose-400/15 text-rose-300"
-                          }`}
-                        >
-                          {outcome ?? match.result}
-                        </span>
-                        <p className="text-2xl font-bold text-white">{score}</p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
             </div>
           </div>
         </section>
@@ -528,19 +464,6 @@ export default async function Home() {
               ))}
             </div>
           </div>
-        </section>
-
-        <section className="grid gap-6 lg:grid-cols-3">
-          {contentHighlights.map((item) => (
-            <article key={item.title} className="glass-card flex flex-col gap-4 p-6">
-              <p className="section-eyebrow">Content</p>
-              <h3 className="text-2xl font-semibold text-white">{item.title}</h3>
-              <p className="text-gray-300">{item.copy}</p>
-              <Link href={item.href} className="text-sm font-semibold text-vengefulLight hover:text-white">
-                {item.action} {"->"}
-              </Link>
-            </article>
-          ))}
         </section>
 
         <SubscribeSection />
