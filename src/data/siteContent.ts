@@ -128,6 +128,7 @@ export const sponsors = [
   {
     name: "Iceline Hosting",
     logo: icelineHostingImage,
+    href: "https://iceline-hosting.com/",
   },
   {
     name: "Your logo could be here!",

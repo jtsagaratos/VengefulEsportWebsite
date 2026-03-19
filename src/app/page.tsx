@@ -207,7 +207,21 @@ export default async function Home() {
                   brand.logo ? "col-span-2 p-2 sm:col-span-2 md:col-span-2" : "px-4 py-3"
                 }`}
               >
-                {brand.logo ? (
+                {brand.logo ? brand.href ? (
+                  <Link
+                    href={brand.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${brand.name} website`}
+                    className="block h-full w-full transition hover:opacity-90"
+                  >
+                    <Image
+                      src={brand.logo}
+                      alt={`${brand.name} logo`}
+                      className="h-full w-full rounded-xl object-cover"
+                    />
+                  </Link>
+                ) : (
                   <Image
                     src={brand.logo}
                     alt={`${brand.name} logo`}
