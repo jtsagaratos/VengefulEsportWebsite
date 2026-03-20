@@ -165,7 +165,7 @@ export const streams = [
     name: "Treeiwnl",
     platform: "Twitch",
     url: "https://www.twitch.tv/treeiwnl",
-    channel: "Treeiwnl",
+    channel: "treeiwnl",
     isLive: false,
     logo: treeImage,
   },
