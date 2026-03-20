@@ -173,14 +173,12 @@ export default async function Home() {
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2 text-sm text-gray-400">
-                  <div className="badge-pill bg-black/40">MRC</div>
-                  <div className="badge-pill bg-black/40">Double Elimination</div>
                 </div>
                 <Link
                   href="/schedule"
                   className="text-xs uppercase tracking-[0.35em] text-vengefulLight hover:text-white"
                 >
-                  View full bracket
+                  View full schedule
                 </Link>
               </>
             ) : (
