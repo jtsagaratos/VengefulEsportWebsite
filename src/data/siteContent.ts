@@ -173,7 +173,7 @@ export const streams = [
     name: "Reallysticky99",
     platform: "Twitch",
     url: "https://www.twitch.tv/reallysticky999",
-    channel: "Reallysticky99",
+    channel: "reallysticky999",
     isLive: false,
     logo: stickyImage,
   },
