@@ -4,7 +4,9 @@ import wadaImage from "../../images/logos/wada_logo.jpg";
 import blankLogo from "../../images/logos/blank_logo.jpg";
 import deathImage from "../../images/logos/death_logo.jpg";
 import affeckImage from "../../images/logos/affekting_logo.jpg";
-import steadyImage from "../../images/logos/steady_logo.jpg";
+import phanImage from "../../images/logos/phan_logo.jpg";
+import stickyImage from "../../images/logos/sticky_logo.jpg";
+import treeImage from "../../images/logos/tree_logo.jpg";
 import FJImage from "../../images/logos/Flying_Jenn.png";
 import aaptImage from "../../images/logos/aapt_image.png";
 import icelineHostingImage from "../../images/logos/icelinehosting_cover.jpg";
@@ -49,7 +51,7 @@ export const roster = [
     role: "Duelist",
     bio: "Backline Hunter",
     badges: ["Clinical", "Deadly"],
-    image: blankLogo,
+    image: stickyImage,
     achievements: ["Achieved Rank 1 OAA 3 times", "Reached MRC top 3 in season 6"],
   },
   {
@@ -57,7 +59,7 @@ export const roster = [
     role: "Duelist",
     bio: "Momentum Shifter",
     badges: ["Explosive", "Aggressive"],
-    image: blankLogo,
+    image: treeImage,
     achievements: ["Maintained OAA for multiple seasons", "Reached MRC top 3 in season 6"],
   },
   {
@@ -81,7 +83,7 @@ export const roster = [
     role: "Strategist (sub)",
     bio: "Momentum Support",
     badges: ["Resilient", "Adaptive"],
-    image: blankLogo,
+    image: phanImage,
     achievements: ["Won MRC Season 2", "Has won over 1k in winnings"],
   },
 ];
@@ -149,7 +151,7 @@ export const streams = [
     url: "https://www.twitch.tv/wada124",
     channel: "wada124",
     isLive: false,
-    logo: "/VNGFLogo_1.png",
+    logo: wadaImage,
   },
   {
     name: "WizardDread",
@@ -165,7 +167,7 @@ export const streams = [
     url: "https://www.twitch.tv/treeiwnl",
     channel: "Treeiwnl",
     isLive: false,
-    logo: "/VNGFLogo_1.png",
+    logo: treeImage,
   },
   {
     name: "Reallysticky99",
@@ -173,7 +175,7 @@ export const streams = [
     url: "https://www.twitch.tv/reallysticky999",
     channel: "Reallysticky99",
     isLive: false,
-    logo: "/VNGFLogo_1.png",
+    logo: stickyImage,
   },
     {
     name: "Kingphan",
@@ -181,7 +183,7 @@ export const streams = [
     url: "https://www.twitch.tv/kingxphan",
     channel: "kingxphan",
     isLive: false,
-    logo: "/VNGFLogo_1.png",
+    logo: phanImage,
   },
   {
     name: "FlyingJenn",
@@ -205,7 +207,7 @@ export const streams = [
     url: "https://www.twitch.tv/hellfiredd1",
     channel: "Hellfired",
     isLive: false,
-    logo: "/VNGFLogo_1.png",
+    logo: blankLogo,
   },
 ];
 
