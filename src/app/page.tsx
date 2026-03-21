@@ -10,6 +10,7 @@ import { getScheduleEvents } from "@/lib/schedule";
 import { fetchLiveStatuses } from "@/lib/twitch";
 import { TwitchIcon } from "@/components/TwitchIcon";
 import { formatDateParts } from "@/utils/dateFormatting";
+import { getGameRecaps } from "@/lib/gameRecaps";
 
 export const dynamic = "force-dynamic";
 
@@ -54,14 +55,22 @@ const formatInstagramDate = (value: string) => {
   return parsed.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 };
 
+const formatRecapDate = (value: string) => {
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) {
+    return value;
+  }
+  return parsed.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+};
+
 export default async function Home() {
-  const [schedule, fetchedStatuses, instagramPosts] = await Promise.all([
+  const [schedule, fetchedStatuses, instagramPosts, gameRecaps] = await Promise.all([
     getScheduleEvents(),
     fetchLiveStatuses(streams.map((stream) => stream.channel.toLowerCase())),
     getInstagramPosts(6),
+    getGameRecaps(),
   ]);
   const nextEvent = schedule[0];
-  const upcomingEvents = schedule.slice(0, 2);
   const merchDrops = merch.slice(0, 3);
   const instagramSecondaryPosts = instagramPosts.slice(1, 4);
   const statusMap = { ...fetchedStatuses };
@@ -233,6 +242,67 @@ export default async function Home() {
           </div>
         </section>
 
+        <section id="results" className="space-y-6">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="section-eyebrow">Last 3 matches</p>
+              <h2 className="text-3xl font-semibold">Recent results and scorelines.</h2>
+            </div>
+            <Link href="/schedule" className="text-xs uppercase tracking-[0.35em] text-gray-400 hover:text-vengefulLight">
+              Full results
+            </Link>
+          </div>
+          <div className="space-y-4">
+            {gameRecaps.length ? (
+              gameRecaps.map((recap) => {
+                const [outcome, ...scoreParts] = recap.result.split(" ");
+                const score = scoreParts.join(" ") || recap.result;
+                const outcomeIsWin = outcome.toLowerCase() === "win";
+
+                return (
+                  <article key={`${recap.event}-${recap.opponent}-${recap.date}`} className="glass-card p-6">
+                    <div className="grid gap-6 md:grid-cols-[1fr_auto_1fr] md:items-center">
+                      <div className="space-y-3">
+                        <p className="section-heading text-gray-400">{recap.event}</p>
+                        {recap.description ? (
+                          <p className="text-sm text-gray-400">{recap.description}</p>
+                        ) : null}
+                        <p className="text-gray-300">{formatRecapDate(recap.date)}</p>
+                      </div>
+                      <div className="flex items-center justify-center gap-4 text-base font-semibold text-white text-center">
+                        <Image
+                          src="/VNGFLogo_1.png"
+                          alt="Vengeful Esports logo"
+                          width={40}
+                          height={40}
+                          className="h-10 w-10 object-contain"
+                        />
+                        <span>VNGFL</span>
+                        <span className="text-xs uppercase tracking-[0.4em] text-gray-500">vs</span>
+                        <span className="text-vengefulLight">{recap.opponent}</span>
+                      </div>
+                      <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center md:justify-self-end">
+                        <p
+                          className={`text-sm font-semibold uppercase tracking-[0.3em] ${
+                            outcomeIsWin ? "text-emerald-300" : "text-rose-300"
+                          }`}
+                        >
+                          {outcome}
+                        </p>
+                        <p className="mt-2 text-2xl font-semibold text-white">{score}</p>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })
+            ) : (
+              <div className="glass-card p-6 text-center text-gray-400">
+                Match recaps will show up here once results are published.
+              </div>
+            )}
+          </div>
+        </section>
+
         <section id="about">
           <div className="glass-panel space-y-6 bg-gradient-to-br from-vengefulDark/80 via-black to-black p-10">
             <p className="section-eyebrow">Inside the program</p>
@@ -320,69 +390,6 @@ export default async function Home() {
                 </article>
               );
             })}
-          </div>
-        </section>
-
-        <section id="schedule" className="space-y-6">
-          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-            <div>
-              <p className="section-eyebrow">Upcoming battles</p>
-              <h2 className="text-3xl font-semibold">Lock in the next watch parties.</h2>
-            </div>
-            <Link href="/schedule" className="text-xs uppercase tracking-[0.35em] text-gray-400 hover:text-vengefulLight">
-              See Full calendar
-            </Link>
-          </div>
-          <div className="space-y-4">
-            {upcomingEvents.length ? (
-              upcomingEvents.map((event) => {
-                const eventDateParts = getEventDateParts(
-                  event.date,
-                  { weekday: "short", month: "short", day: "numeric" },
-                  { hour: "numeric", minute: "2-digit", timeZoneName: "short" },
-                );
-                return (
-                  <article
-                    key={`${event.date}-${event.opponent}`}
-                    className="glass-card p-6"
-                  >
-                    <div className="grid gap-6 md:grid-cols-[1fr_auto_1fr] md:items-center">
-                      <div className="space-y-3">
-                        <p className="section-heading text-gray-400">{event.stage}</p>
-                        <h3 className="text-2xl font-semibold text-white">{event.title}</h3>
-                        <p className="text-gray-300">{event.location}</p>
-                      </div>
-                      <div className="flex items-center justify-center gap-4 text-base font-semibold text-white text-center">
-                        <Image
-                          src="/VNGFLogo_1.png"
-                          alt="Vengeful Esports logo"
-                          width={40}
-                          height={40}
-                          className="h-10 w-10 object-contain"
-                        />
-                        <span>VNGFL</span>
-                        <span className="text-xs uppercase tracking-[0.35em] text-gray-500">vs</span>
-                        <span className="text-vengefulLight">{event.opponent}</span>
-                      </div>
-                      <div className="flex flex-col items-center gap-3 md:items-end">
-                        <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
-                          <p className="text-lg font-semibold text-white">{eventDateParts.dateLabel}</p>
-                          <p className="text-sm text-gray-300">{eventDateParts.timeLabel}</p>
-                        </div>
-                        <NextEventCountdown
-                          targetDate={event.date}
-                          className="text-base font-semibold text-white leading-none whitespace-nowrap"
-                        />
-                      </div>
-                    </div>
-                  </article>
-                );
-              })
-            ) : (
-              <div className="glass-card p-6 text-center text-gray-400">
-                We&apos;re between tournament dates right now. Check back soon or follow for updates.
-              </div>
-            )}
           </div>
         </section>
 

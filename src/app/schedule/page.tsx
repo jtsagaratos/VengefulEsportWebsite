@@ -72,6 +72,9 @@ export default async function SchedulePage() {
                   <div className="grid gap-6 md:grid-cols-[1fr_auto_1fr] md:items-center">
                     <div className="space-y-3">
                       <p className="section-heading text-gray-400">{recap.event}</p>
+                      {recap.description ? (
+                        <p className="text-sm text-gray-400">{recap.description}</p>
+                      ) : null}
                       <p className="text-gray-300">{formatRecapDate(recap.date)}</p>
                     </div>
                     <div className="flex items-center justify-center gap-4 text-base font-semibold text-white text-center">

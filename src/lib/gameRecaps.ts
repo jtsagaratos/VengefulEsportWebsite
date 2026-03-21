@@ -6,6 +6,7 @@ export type GameRecap = {
   event: string;
   date: string;
   result: string;
+  description?: string;
 };
 
 const fallbackRecaps: GameRecap[] = [
@@ -14,22 +15,25 @@ const fallbackRecaps: GameRecap[] = [
     event: "MRC S6 Open Qualifiers",
     date: "February 14, 2026",
     result: "Win 3-0",
+    description: "",
   },
   {
     opponent: "Purge Umbra",
     event: "MRC S6 Open Qualifiers",
     date: "February 14, 2026",
     result: "Win 1-0",
+    description: "",
   },
   {
     opponent: "ScarletValor",
     event: "MRC S6 Open Qualifiers",
     date: "February 14, 2026",
     result: "Win 1-0",
+    description: "",
   },
 ];
 
-const defaultRecapRange = "Recaps!A2:D";
+const defaultRecapRange = "Recaps!A2:E";
 
 async function fetchRecapsFromGoogle(): Promise<GameRecap[]> {
   const range = process.env.GOOGLE_SHEETS_RECAP_RANGE ?? defaultRecapRange;
@@ -50,7 +54,7 @@ async function fetchRecapsFromGoogle(): Promise<GameRecap[]> {
 
     return rows
       .map((row) => {
-        const [event, opponent, dateValue, result] = row;
+        const [event, opponent, dateValue, result, description] = row;
         const parsedDate = parseDateValue(dateValue);
         if (!parsedDate || Number.isNaN(parsedDate.getTime())) {
           return null;
@@ -60,11 +64,13 @@ async function fetchRecapsFromGoogle(): Promise<GameRecap[]> {
         const opponentLabel = safeString(opponent).trim();
         const eventLabel = safeString(event).trim();
         const resultLabel = safeString(result).trim();
+        const descriptionLabel = safeString(description).trim();
         return {
           opponent: opponentLabel || "TBD",
           event: eventLabel || "TBD",
           date: parsedDate.toISOString(),
           result: resultLabel || "TBD",
+          description: descriptionLabel,
         } satisfies GameRecap;
       })
       .filter((recap): recap is GameRecap => Boolean(recap));
