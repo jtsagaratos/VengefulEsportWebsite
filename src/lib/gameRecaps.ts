@@ -34,6 +34,7 @@ const fallbackRecaps: GameRecap[] = [
 ];
 
 const defaultRecapRange = "Recaps!A2:E";
+const isGameRecap = (recap: GameRecap | null): recap is GameRecap => recap !== null;
 
 async function fetchRecapsFromGoogle(): Promise<GameRecap[]> {
   const range = process.env.GOOGLE_SHEETS_RECAP_RANGE ?? defaultRecapRange;
@@ -52,8 +53,7 @@ async function fetchRecapsFromGoogle(): Promise<GameRecap[]> {
 
     const rows = (response.data.values ?? []) as Array<Array<string | number | undefined>>;
 
-    return rows
-      .map((row) => {
+    const recaps = rows.map((row): GameRecap | null => {
         const [event, opponent, dateValue, result, description] = row;
         const parsedDate = parseDateValue(dateValue);
         if (!parsedDate || Number.isNaN(parsedDate.getTime())) {
@@ -72,8 +72,9 @@ async function fetchRecapsFromGoogle(): Promise<GameRecap[]> {
           result: resultLabel || "TBD",
           description: descriptionLabel,
         } satisfies GameRecap;
-      })
-      .filter((recap): recap is GameRecap => Boolean(recap));
+      });
+
+    return recaps.filter(isGameRecap);
   } catch (error) {
     console.error("Failed to fetch game recaps from Google Sheets", error);
     return [];
