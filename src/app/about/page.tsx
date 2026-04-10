@@ -39,11 +39,6 @@ const staff: StaffMember[] = [
     bio: "Ashh is Vengeful's Head Coach, leading the team's competitive development and strategic preparation. Currently studying biomedical sciences, he brings discipline, structure, and analytical thinking to the roster. A former rugby player, he understands high-performance environments and what it takes to compete at the highest level.",
   },
   {
-    role: "Assistant Coach",
-    name: "Boomed",
-    bio: "TBD",
-  },
-  {
     role: "Manager",
     name: "Lea",
     bio: "Lea serves as Vengeful's Team Manager and Social Media Director, overseeing operations and shaping the team's digital presence. She is currently studying forensic psychology and brings strong analytical thinking to both strategy and branding. Outside of esports, she enjoys music, dogs, and competitive FPS games.",
