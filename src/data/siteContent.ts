@@ -38,15 +38,6 @@ export const roster = [
     achievements: ["Achieved top 10 with Emma and Groot", "Has reached MRC top 6 in season 4 and 5"],
   },
   {
-    name: "Wada124",
-    role: "Duelist",
-    bio: "Steadfast Pressure",
-    badges: ["Ruthless", "Surgical"],
-    image: wadaImage,
-    imageZoom: 1.2,
-    achievements: ["Won the Jay3 Community Clash Tournament", "Peaked rank 1 on leaderboard in season 4.5"],
-  },
-  {
     name: "Reallysticky99",
     role: "Duelist",
     bio: "Backline Hunter",
@@ -152,14 +143,6 @@ export const streams = [
     channel: "fpscollin",
     isLive: true,
     logo: colinImage,
-  },
-  {
-    name: "Wada124",
-    platform: "Twitch",
-    url: "https://www.twitch.tv/wada124",
-    channel: "wada124",
-    isLive: false,
-    logo: wadaImage,
   },
   {
     name: "WizardDread",
