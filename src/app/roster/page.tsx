@@ -41,6 +41,8 @@ export default async function RosterPage() {
                 (stream) => stream.name.toLowerCase() === player.name.toLowerCase(),
               );
               const playerImage = player.image ?? playerStream?.logo ?? "/VNGFLogo_1.png";
+              const imageZoom =
+                "imageZoom" in player && typeof player.imageZoom === "number" ? player.imageZoom : undefined;
               return (
                 <article key={player.name} className="glass-card flex flex-col gap-5 p-6 sm:flex-row sm:items-center">
                   <div className="flex-shrink-0">
@@ -51,7 +53,7 @@ export default async function RosterPage() {
                         width={112}
                         height={112}
                         className="h-full w-full object-cover transition-transform duration-500"
-                        style={player.imageZoom ? { transform: `scale(${player.imageZoom})` } : undefined}
+                        style={imageZoom ? { transform: `scale(${imageZoom})` } : undefined}
                       />
                     </div>
                   </div>
