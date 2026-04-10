@@ -10,7 +10,17 @@ import treeImage from "../../images/logos/tree_logo.jpg";
 import FJImage from "../../images/logos/Flying_Jenn.png";
 import aaptImage from "../../images/logos/aapt_image.png";
 import icelineHostingImage from "../../images/logos/icelinehosting_cover.jpg";
+import type { StaticImageData } from "next/image";
 
+type RosterPlayer = {
+  name: string;
+  role: string;
+  bio: string;
+  badges: string[];
+  image: StaticImageData;
+  imageZoom?: number;
+  achievements: string[];
+};
 
 export const navLinks = [
   { label: "Home", href: "/" },
@@ -20,7 +30,7 @@ export const navLinks = [
   { label: "Merch", href: "/merch" },
 ];
 
-export const roster = [
+export const roster: RosterPlayer[] = [
   {
     name: "WizardDread",
     role: "Captain/Vanguard",
